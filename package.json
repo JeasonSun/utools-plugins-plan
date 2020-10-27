@@ -1,0 +1,26 @@
+{
+  "name": "plan",
+  "version": "0.0.1",
+  "description": "plan是一款简洁易用的待办事项",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsc -w",
+    "build": "tsc"
+  },
+  "keywords": [
+    "utools",
+    "plan",
+    "plan-todo",
+    "todo",
+    "list"
+  ],
+  "author": "mojie",
+  "license": "ISC",
+  "dependencies": {
+    "utools-helper": "^1.4.6"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.0",
+    "typescript": "^4.0.3"
+  }
+}

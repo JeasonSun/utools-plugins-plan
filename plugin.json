@@ -1,0 +1,22 @@
+{
+  "pluginName": "plan",
+  "version": "0.0.1",
+  "description": "plan是一款简洁易用的待办事项",
+  "author": "mojie",
+  "homepage": "https://www.yemaoz.cn",
+  "preload": "dist/preload/preload.js",
+  "logo": "logo.png",
+  "main": "dist/app/index.html",
+  "features": [
+    {
+      "code": "plan-home",
+      "explain": "plan",
+      "cmds": ["todo", "plan", "清单"]
+    },
+    {
+      "code": "plan-preload",
+      "explain": "test路径设置",
+      "cmds": ["test"]
+    }
+  ]
+}
