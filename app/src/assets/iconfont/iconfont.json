@@ -1,0 +1,51 @@
+{
+  "id": "2164470",
+  "name": "utools_todo",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "17336982",
+      "name": "tk_frame_icon_solie_rectangle_selected",
+      "font_class": "rect",
+      "unicode": "e669",
+      "unicode_decimal": 58985
+    },
+    {
+      "icon_id": "9210296",
+      "name": "Rectangle",
+      "font_class": "Rectangle",
+      "unicode": "e61c",
+      "unicode_decimal": 58908
+    },
+    {
+      "icon_id": "8081517",
+      "name": "to-do",
+      "font_class": "to-do",
+      "unicode": "e654",
+      "unicode_decimal": 58964
+    },
+    {
+      "icon_id": "12344912",
+      "name": "Star",
+      "font_class": "Star",
+      "unicode": "f94f",
+      "unicode_decimal": 63823
+    },
+    {
+      "icon_id": "13083455",
+      "name": "star",
+      "font_class": "x-copy",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "14929202",
+      "name": "todo",
+      "font_class": "todo",
+      "unicode": "e622",
+      "unicode_decimal": 58914
+    }
+  ]
+}

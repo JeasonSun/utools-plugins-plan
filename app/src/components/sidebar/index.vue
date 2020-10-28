@@ -1,14 +1,19 @@
 <template>
-  <div class="app-grid-item">
-    
+  <div class="sidebar-container app-grid-item">
+    <ListContainer />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import ListContainer from '@/components/sidebar/ListContainer.vue';
+import '@/styles/sidebar.less';
 
 export default defineComponent({
   name: 'Sidebar',
+  components: {
+    ListContainer
+  },
   props: {
   },
 });
