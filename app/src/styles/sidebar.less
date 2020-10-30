@@ -1,105 +1,100 @@
 @import './rule.less';
 
 .sidebar-container {
-  padding: 16px 0;
+  padding-top: 16px;
   border-right: 1px solid @color-dividers;
 }
+
+.sidebar-list__cate,
+.sidebar-list__dir {
+  font-size: @font-normal;
+  line-height: @line-height-normal;
+  padding: 5px 16px;
+  color: @color-black;
+  display: flex;
+
+  .sidebar-list__icon {
+    font-size: @font-small;
+  }
+
+  .sidebar-list__name {
+    flex: 1;
+    padding: 0 8px;
+  }
+
+  .sidebar-list__count {
+    color: @color-black6;
+    font-size: @font-small;
+    width: 16px;
+    text-align: center;
+  }
+
+  .sidebar-list__arrow {
+    padding-left: 10px;
+    color: @color-black6;
+    font-size: @font-small;
+    text-align: center;
+  }
+}
+
+
 
 .sidebar-list__container {
   .sidebar-list__header {
     font-size: @font-normal;
     line-height: @line-height-normal;
-    padding: 15px 0;
+    padding: 10px 0;
     padding-left: 16px;
-    // padding: ;
-    // border-bottom: 1px solid @color-border;
+    margin-top: 10px;
   }
+}
 
-  .sidebar-list__list {
-    padding-right: 16px;
-    .sidebar-list__item {
-      font-size: @font-normal;
-      line-height: @line-height-normal;
-      padding: 10px 0;
-      padding-left: 16px;
-      margin: 4px 0;
-      display: flex;
-      flex-direction: row;
-      border-top-right-radius: 20px;
-      border-bottom-right-radius: 20px;
-      background-color: aliceblue;
-      cursor: pointer;
-      &:nth-child(1){
-        background-color: @color-blue-bg;
-        .sidebar-list-item__icon{
-          color: @color-blue;
-        }
-      }
-      &:nth-child(2){
-        background-color: @color-red-bg;
-        .sidebar-list-item__icon{
-          color: @color-red;
-        }
-        .sidebar-list-item__count{
-          background-color: @color-red;
-        }
-      }
-      &:nth-child(3){
-        background-color: @color-green-bg;
-        .sidebar-list-item__icon{
-          color: @color-green;
-        }
-        .sidebar-list-item__count{
-          background-color: @color-green;
-        }
-      }
-      &:nth-child(4){
-        background-color: @color-yellow-bg;
-        .sidebar-list-item__icon{
-          color: @color-yellow;
-        }
-        .sidebar-list-item__count{
-          background-color: @color-yellow;
-        }
-      }
-      &:nth-child(5){
-        background-color: @color-pink-bg;
-        .sidebar-list-item__icon{
-          color: @color-pink;
-        }
-        .sidebar-list-item__count{
-          background-color: @color-pink;
-        }
-      }
-      &:nth-child(6){
-        background-color: @color-orange-bg;
-        .sidebar-list-item__icon{
-          color: @color-orange;
-        }
-        .sidebar-list-item__count{
-          background-color: @color-orange;
-        }
-      }
-    }
-    .sidebar-list-item__icon{
-      font-size: @font-small;
-      color: @color-primary;
-    }
-    .sidebar-list-item__name{
-      flex: 1;
-      padding:0 10px 0 4px;
-    }
-    .sidebar-list-item__count{
-      width: @line-height-small;
-      height: @line-height-small;
-      line-height: @line-height-small;
-      border-radius: 100%;
-      background-color: @color-primary;
-      font-size: @font-small;
-      color: @color-white;
-      text-align: center;
-      margin-right: 10px;
+.sidebar-list__dir {
+  .sidebar-list__arrow {
+    &.open {
+      transform: rotate(90deg);
     }
 
+    &.close {
+      transform: rotate(0);
+    }
+  }
+}
+
+.sidebar-list__dir-list {
+  padding-left: 20px;
+}
+
+.sidebar-flex-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+.sidebar-list-flex-container {
+  flex: 1;
+  overflow: auto;
+}
+
+.sidebar-action-flex-container {
+  padding: 10px;
+  text-align: center;
+}
+
+.add-btn {
+  display: inline-block;
+  width: 45px;
+  height: 45px;
+  line-height: 45px;
+  border-radius: 100px;
+  background-color: @color-primary;
+  color: @color-white;
+  position: relative;
+  cursor: pointer;
+  box-shadow: 0px 3px 6px -4px rgba(24, 83, 243, 0.22), 0px 6px 16px 0px rgba(24, 83, 243, 0.12), 0px 9px 28px 8px rgba(24, 83, 243, 0.09);
+
+  .iconfont {
+    font-size: 20px;
   }
 }

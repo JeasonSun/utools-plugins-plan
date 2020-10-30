@@ -18,10 +18,9 @@ export default defineComponent({
   components: {
     Sidebar,
     Lists
-  },
+  }
 });
 </script>
 
 <style lang="less">
-
 </style>

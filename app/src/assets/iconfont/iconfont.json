@@ -6,6 +6,83 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "12740095",
+      "name": "对",
+      "font_class": "right",
+      "unicode": "e674",
+      "unicode_decimal": 58996
+    },
+    {
+      "icon_id": "6658970",
+      "name": "dot",
+      "font_class": "dot",
+      "unicode": "e6bc",
+      "unicode_decimal": 59068
+    },
+    {
+      "icon_id": "2364443",
+      "name": "arrow",
+      "font_class": "arrow",
+      "unicode": "e622",
+      "unicode_decimal": 58914
+    },
+    {
+      "icon_id": "3946429",
+      "name": "box",
+      "font_class": "box",
+      "unicode": "e664",
+      "unicode_decimal": 58980
+    },
+    {
+      "icon_id": "1338348",
+      "name": "add",
+      "font_class": "add",
+      "unicode": "e6b9",
+      "unicode_decimal": 59065
+    },
+    {
+      "icon_id": "8093864",
+      "name": "File default",
+      "font_class": "fileopen",
+      "unicode": "e69a",
+      "unicode_decimal": 59034
+    },
+    {
+      "icon_id": "11920816",
+      "name": "日历",
+      "font_class": "done",
+      "unicode": "f2cd",
+      "unicode_decimal": 62157
+    },
+    {
+      "icon_id": "13193911",
+      "name": "file",
+      "font_class": "fileclose",
+      "unicode": "e765",
+      "unicode_decimal": 59237
+    },
+    {
+      "icon_id": "13422895",
+      "name": "待办",
+      "font_class": "daiban1",
+      "unicode": "e6a3",
+      "unicode_decimal": 59043
+    },
+    {
+      "icon_id": "16016379",
+      "name": "list",
+      "font_class": "list",
+      "unicode": "e62d",
+      "unicode_decimal": 58925
+    },
+    {
+      "icon_id": "17766768",
+      "name": "待办",
+      "font_class": "daiban",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    },
+    {
       "icon_id": "17336982",
       "name": "tk_frame_icon_solie_rectangle_selected",
       "font_class": "rect",
@@ -13,39 +90,11 @@
       "unicode_decimal": 58985
     },
     {
-      "icon_id": "9210296",
-      "name": "Rectangle",
-      "font_class": "Rectangle",
-      "unicode": "e61c",
-      "unicode_decimal": 58908
-    },
-    {
-      "icon_id": "8081517",
-      "name": "to-do",
-      "font_class": "to-do",
-      "unicode": "e654",
-      "unicode_decimal": 58964
-    },
-    {
       "icon_id": "12344912",
       "name": "Star",
-      "font_class": "Star",
+      "font_class": "star",
       "unicode": "f94f",
       "unicode_decimal": 63823
-    },
-    {
-      "icon_id": "13083455",
-      "name": "star",
-      "font_class": "x-copy",
-      "unicode": "e600",
-      "unicode_decimal": 58880
-    },
-    {
-      "icon_id": "14929202",
-      "name": "todo",
-      "font_class": "todo",
-      "unicode": "e622",
-      "unicode_decimal": 58914
     }
   ]
 }
