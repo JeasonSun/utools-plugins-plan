@@ -22,7 +22,7 @@ import { defineComponent } from 'vue';
 import ListCate from '@/components/sidebar/ListCate.vue';
 import ListContainer from '@/components/sidebar/ListContainer.vue';
 import '@/styles/sidebar.less';
-import { projectStore } from '@/store/modules/project';
+
 
 export default defineComponent({
   name: 'Sidebar',
@@ -32,15 +32,8 @@ export default defineComponent({
   },
   props: {
   },
-  created(){
-    this.getProjectList()
-  },
-  methods:{
-    async getProjectList() {
-      await projectStore.getListAction()
+  methods: {
 
-      console.log('methods', projectStore.list)
-    }
   }
 });
 </script>

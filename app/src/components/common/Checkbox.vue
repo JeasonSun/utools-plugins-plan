@@ -57,10 +57,13 @@ export default defineComponent({
   position: relative;
   color: #ffffff;
   &.checked {
-    background: #1890ff;
-    box-shadow: 0px 1px 2px -2px rgba(11, 68, 223, 0.16),
-      0px 3px 6px 0px rgba(11, 68, 223, 0.12),
-      0px 5px 12px 4px rgba(11, 68, 223, 0.09);
+    // background: #1890ff;
+    background: rgba(24, 144, 255, 0.7);
+    border: 1px solid rgba(24, 144, 255, 0.1);
+    color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0px 1px 2px -2px rgba(11, 68, 223, 0.08),
+      0px 3px 6px 0px rgba(11, 68, 223, 0.06),
+      0px 5px 12px 4px rgba(11, 68, 223, 0.04);
   }
 }
 </style>

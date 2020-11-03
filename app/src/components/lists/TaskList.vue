@@ -1,7 +1,7 @@
 <template>
   <div class="app-task__list">
     <Checkbox @change="onCheckBoxChange" :value="checked" />
-    <div class="app-task__list-input">
+    <div class="app-task__list-input" :class="[isChecked ? 'checked' : '']">
       <input type="text" value="【项目P0】智慧学校工作台V1.1.1" :disabled="isChecked"/>
       <div class="app-task__list-info">
         <span class="app-task__list-time">

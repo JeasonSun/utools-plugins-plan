@@ -1,4 +1,5 @@
 import { getProjectListApi } from '@/api/project'
+import { ProjectTypeEnum } from '@/enums/projectTypeEnum'
 import store from '@/store'
 import { hotModuleUnregisterModule } from '@/utils/helper/vuexHelper'
 import { isArray } from '@/utils/is'
@@ -13,21 +14,20 @@ import {
 const NAME = 'project'
 hotModuleUnregisterModule(NAME)
 
-export enum ProjectType {
-  List,
-  Project
-}
+
 
 const defaultProject: ProjectInfo = {
-  type: ProjectType.List,
+  type: ProjectTypeEnum.PROJECT,
   name: '默认项目',
-  count: 0
+  count: 0,
+  id: 'p-0'
 }
 
 export interface ProjectInfo {
-  type: ProjectType;
+  type: ProjectTypeEnum.PROJECT | ProjectTypeEnum.LIST;
   name: string;
   count: number;
+  id: string;
   children?: ProjectInfo[];
 }
 
@@ -42,12 +42,12 @@ class Project extends VuexModule {
   list: ProjectState['list'] = []
 
   @Mutation
-  commitList (list: ProjectInfo[]): void {
+  commitList(list: ProjectInfo[]): void {
     this.list = [...list]
   }
 
   @Action
-  async getListAction () {
+  async getListAction() {
     let list = await getProjectListApi()
     list = isArray(list) ? list : []
     let result

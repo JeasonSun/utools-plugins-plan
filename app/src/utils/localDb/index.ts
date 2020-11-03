@@ -10,7 +10,6 @@ const localStore = localForage.createInstance({
 export async function getProjectList (): Promise<ProjectInfo[]> {
   let list: ProjectInfo[] | null = await localStore.getItem('projectList')
   list = isArray(list) ? list : []
-  console.log(list, '-====')
   return list
 }
 
