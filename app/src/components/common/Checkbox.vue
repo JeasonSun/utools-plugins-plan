@@ -45,12 +45,13 @@ export default defineComponent({
 </script>
 
 <style scoped lang="less">
+@import url('../../styles/rule.less');
 .plan-checkbox {
   width: 20px;
   height: 20px;
   line-height: 20px;
   text-align: center;
-  border: 1px solid #1890ff;
+  border: 1px solid @color-primary;
   border-radius: 100%;
   display: inline-block;
   cursor: pointer;

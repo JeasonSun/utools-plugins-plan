@@ -1,5 +1,8 @@
 <template>
   <div class="sidebar-container app-grid-item sidebar-flex-container">
+    <div class="sidebar-toolbar-flex-container">
+      <Toolbar/>
+    </div>
     <div class="sidebar-cate-flex-container">
       <ListCate icon="box" name="收集箱" />
       <ListCate icon="daiban" name="今天" />
@@ -19,6 +22,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import Toolbar from '@/components/sidebar/Toolbar.vue';
 import ListCate from '@/components/sidebar/ListCate.vue';
 import ListContainer from '@/components/sidebar/ListContainer.vue';
 import '@/styles/sidebar.less';
@@ -27,6 +31,7 @@ import '@/styles/sidebar.less';
 export default defineComponent({
   name: 'Sidebar',
   components: {
+    Toolbar,
     ListCate,
     ListContainer
   },

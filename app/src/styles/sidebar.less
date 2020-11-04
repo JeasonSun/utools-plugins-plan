@@ -1,7 +1,7 @@
 @import './rule.less';
 
 .sidebar-container {
-  padding-top: 16px;
+  // padding-top: 16px;
   border-right: 1px solid @color-dividers;
 }
 
@@ -37,8 +37,6 @@
   }
 }
 
-
-
 .sidebar-list__container {
   .sidebar-list__header {
     font-size: @font-normal;
@@ -72,6 +70,10 @@
   box-sizing: border-box;
 }
 
+.sidebar-toolbar-flex-container {
+  padding: 16px;
+}
+
 .sidebar-list-flex-container {
   flex: 1;
   overflow: auto;
@@ -92,9 +94,37 @@
   color: @color-white;
   position: relative;
   cursor: pointer;
-  box-shadow: 0px 3px 6px -4px rgba(24, 83, 243, 0.22), 0px 6px 16px 0px rgba(24, 83, 243, 0.12), 0px 9px 28px 8px rgba(24, 83, 243, 0.09);
+  box-shadow: 0px 3px 6px -4px rgba(17, 77, 243, 0.22),
+    0px 6px 16px 0px rgba(24, 83, 243, 0.12),
+    0px 9px 28px 8px rgba(16, 74, 233, 0.09);
 
   .iconfont {
     font-size: 20px;
+  }
+}
+
+.sidebar-toolbar__container {
+  // border-bottom: 1px solid @color-dividers;
+  display: flex;
+  .plan-logo {
+    flex: 1;
+    .iconfont {
+      font-size: 28px;
+    }
+  }
+  .plan-notice {
+    position: relative;
+    cursor: pointer;
+    font-size: @font-normal;
+    .notice-dot {
+      display: block;
+      width: 6px;
+      height: 6px;
+      background-color: @color-red;
+      border-radius: 100px;
+      position: absolute;
+      top: -2px;
+      right: -2px;
+    }
   }
 }

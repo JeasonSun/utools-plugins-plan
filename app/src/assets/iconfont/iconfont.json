@@ -6,6 +6,55 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "1160181",
+      "name": "notice",
+      "font_class": "notice",
+      "unicode": "e673",
+      "unicode_decimal": 58995
+    },
+    {
+      "icon_id": "18030866",
+      "name": "p_logo",
+      "font_class": "plogo",
+      "unicode": "e608",
+      "unicode_decimal": 58888
+    },
+    {
+      "icon_id": "18030353",
+      "name": "p-logo",
+      "font_class": "pbg",
+      "unicode": "e607",
+      "unicode_decimal": 58887
+    },
+    {
+      "icon_id": "18029851",
+      "name": "planlist",
+      "font_class": "planlist",
+      "unicode": "e606",
+      "unicode_decimal": 58886
+    },
+    {
+      "icon_id": "18029384",
+      "name": "未标题-3_画板 1",
+      "font_class": "plan",
+      "unicode": "e605",
+      "unicode_decimal": 58885
+    },
+    {
+      "icon_id": "15890002",
+      "name": "icon_todo_roger",
+      "font_class": "icon_todo_roger",
+      "unicode": "e826",
+      "unicode_decimal": 59430
+    },
+    {
+      "icon_id": "14786385",
+      "name": "task",
+      "font_class": "task",
+      "unicode": "e66c",
+      "unicode_decimal": 58988
+    },
+    {
       "icon_id": "12740095",
       "name": "对",
       "font_class": "right",
