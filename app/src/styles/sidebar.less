@@ -12,6 +12,7 @@
   padding: 5px 16px;
   color: @color-black;
   display: flex;
+  cursor: pointer;
 
   .sidebar-list__icon {
     font-size: @font-small;
@@ -30,10 +31,18 @@
   }
 
   .sidebar-list__arrow {
-    padding-left: 10px;
+    // padding-left: 10px;
     color: @color-black6;
     font-size: @font-small;
     text-align: center;
+  }
+}
+
+.sidebar-list__cate{
+  border-top-right-radius: 16px;
+  border-bottom-right-radius: 16px;
+  &:hover{
+    background-color: @color-blue1;
   }
 }
 
@@ -47,7 +56,26 @@
   }
 }
 
+.sidebar-list__dir-container {
+  &.open {
+    .sidebar-list__dir-list {
+      display: block;
+      // transform: scaleY(100%);
+      // height: auto;
+      // transition: all 0.3s cubic-bezier(.645,.045,.355,1);
+    }
+  }
+  &.close {
+    .sidebar-list__dir-list {
+      display: none;
+      // transform: scaleY(0);
+      // height: 0;
+    }
+  }
+}
+
 .sidebar-list__dir {
+  cursor: pointer;
   .sidebar-list__arrow {
     &.open {
       transform: rotate(90deg);
@@ -61,6 +89,7 @@
 
 .sidebar-list__dir-list {
   padding-left: 20px;
+  transform-origin: top center;
 }
 
 .sidebar-flex-container {
@@ -109,7 +138,14 @@
   .plan-logo {
     flex: 1;
     .iconfont {
-      font-size: 28px;
+      font-size: 24px;
+    }
+  }
+  .plan-setting {
+    color: @color-black7;
+    cursor: pointer;
+    &:hover {
+      color: @color-black;
     }
   }
   .plan-notice {

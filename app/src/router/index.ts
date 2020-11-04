@@ -1,4 +1,5 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
+import type { App } from 'vue'
 import Home from '../views/Home.vue'
 
 const routes: Array<RouteRecordRaw> = [
@@ -21,5 +22,11 @@ const router = createRouter({
   history: createWebHashHistory(process.env.BASE_URL),
   routes
 })
+
+export function setupRouter(app: App<Element>){
+  app.use(router)
+  //
+  // createGuard(router);
+}
 
 export default router

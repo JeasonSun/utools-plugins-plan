@@ -14,7 +14,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import Checkbox from '@/components/common/Checkbox.vue';
+import Checkbox from '@/components/Checkbox/index.vue';
 
 export default defineComponent({
   name: 'TaskList',

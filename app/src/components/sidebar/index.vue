@@ -13,7 +13,7 @@
       <ListContainer />
     </div>
     <div class="sidebar-action-flex-container">
-      <div class="add-btn">
+      <div class="add-btn" @click="addList">
         <span class="iconfont iconadd"></span>
       </div>
     </div>
@@ -37,8 +37,17 @@ export default defineComponent({
   },
   props: {
   },
-  methods: {
+  setup(props, context){
 
+    // 点击添加按钮 -> 弹窗
+    const addList = () => {
+      console.log('addList')
+      console.log(context)
+      // context.$message.info('This is a normal message');
+    }
+    return {
+      addList
+    }
   }
 });
 </script>

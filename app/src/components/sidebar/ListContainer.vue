@@ -9,7 +9,7 @@
         :key="item.id"
         v-if="item.type === ProjectTypeEnum.LIST"
       />
-      <ListDir :name="item.name" :key="item.id" v-if="item.type === ProjectTypeEnum.PROJECT"/>
+      <ListDir :name="item.name" :key="item.id" v-if="item.type === ProjectTypeEnum.PROJECT" :id="item.id"/>
     </template>
   </div>
 </template>

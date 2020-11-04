@@ -1,6 +1,6 @@
 <template>
   <div class="sidebar-list__dir-container" :class="[isOpen ? 'open' : 'close']">
-    <div class="sidebar-list__dir">
+    <div class="sidebar-list__dir" @click="toggleDir">
       <div class="sidebar-list__icon">
         <span
           class="iconfont"
@@ -16,21 +16,19 @@
       </div>
     </div>
     <div class="sidebar-list__dir-list">
-      <ListCate name="重要不紧急" />
-      <ListCate name="重要且紧急" />
-      <ListCate name="不重要但紧急" />
-      <ListCate name="不重要且不紧急" />
+      <ListCate :name="item.name" :key="item.id" v-for="item in subList" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import ListCate from '@/components/sidebar/ListCate.vue';
+import { defineComponent, onMounted, ref, toRefs } from 'vue'
+import ListCate from '@/components/sidebar/ListCate.vue'
+import { ProjectInfo, projectStore } from '@/store/modules/project'
 
 export default defineComponent({
   name: 'ListDir',
-  components:{
+  components: {
     ListCate
   },
   props: {
@@ -38,19 +36,40 @@ export default defineComponent({
       type: String,
       default: '默认文件夹'
     },
+    id: {
+      type: String,
+      required: true
+    },
     count: {
       type: Number,
       default: 0
     }
   },
-  data() {
+  setup (props) {
+    const { id } = toRefs(props)
+    const isOpen = ref(false)
+    const subList = ref<ProjectInfo[]>([])
+
+    const toggleDir = () => {
+      isOpen.value = !isOpen.value
+    }
+    const getListByDirId = async (id: string) => {
+      const childList = await projectStore.getListByDirIdAction(id)
+      subList.value = childList
+    }
+
+    onMounted(() => {
+      getListByDirId(id.value)
+    })
+
     return {
-      isOpen: false
+      isOpen,
+      subList,
+      toggleDir
     }
   }
-});
+})
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="less">
-</style>
+<style scoped lang="less"></style>
