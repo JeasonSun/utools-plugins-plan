@@ -40,6 +40,11 @@ export default defineComponent({
   },
   props: {},
   setup (props, context) {
+    /**
+     * 将registerAddListModal注册方法传递给BasicModal，
+     * 在BasicModal中会把基础Modal的
+     * 
+     */
     const [registerAddListModal, listModal] = useModal()
 
     // 点击添加按钮 -> 弹窗

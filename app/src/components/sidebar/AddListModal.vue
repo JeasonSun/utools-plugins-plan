@@ -1,5 +1,5 @@
 <template>
-  <BasicModal v-bind="$attrs">
+  <BasicModal v-bind="$attrs"  title="Modal Title" :useWrapper='false' >
     AddListModal
   </BasicModal>
 </template>

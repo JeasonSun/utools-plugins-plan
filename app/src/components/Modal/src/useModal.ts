@@ -12,6 +12,11 @@ export function useModal(): UseModalReturnType {
   const loadedRef = ref<Nullable<boolean>>(false)
   const uidRef = ref<string>('')
 
+  /**
+   * 注册弹窗，往全局上挂载需要的方式
+   * @param modalMethod 
+   * @param uuid 
+   */
   function register(modalMethod: ModalMethods, uuid: string) {
     uidRef.value = uuid
     console.log('register ....', uuid)
@@ -37,6 +42,12 @@ export function useModal(): UseModalReturnType {
     return instance
   }
 
+  /**
+   * 暴露弹窗的方法，
+   * 1. setModalProps:设置弹窗的属性
+   * 2. openModal:打开弹窗
+   * 3. transferModalData:更改弹窗，替换uid
+   */
   const methods: ReturnMethods = {
     setModalProps: (props: Partial<ModalProps>): void => {
       getInstance().setModalProps(props);

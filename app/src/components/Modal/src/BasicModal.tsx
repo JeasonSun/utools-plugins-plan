@@ -1,8 +1,6 @@
-import { getSlot } from '@/utils/helper/tsxHelper';
 import { computed, defineComponent, ref, unref, watch, watchEffect } from 'vue';
 import { basicProps } from './props';
 import { ModalMethods, ModalProps } from './types';
-import { BasicTitle } from '@/components/Basic';
 import { Modal } from 'ant-design-vue';
 import { buildUUID } from '@/utils/uuid';
 import { deepMerge } from '@/utils';
@@ -13,13 +11,9 @@ export default defineComponent({
   props: basicProps,
   emits: ['visible-change', 'height-change', 'cancel', 'ok', 'register'],
   setup(props, { slots, emit, attrs }) {
+
     const visibleRef = ref(false)
     const propsRef = ref<Partial<ModalProps> | null>(null)
-    const modalWrapperRef = ref<any>(null)
-
-    const extHeightRef = ref(0)
-    const formerHeightRef = ref(0)
-    const fullScreenRef = ref(false)
 
     const getMergeProps = computed(() => {
       return {
@@ -36,20 +30,17 @@ export default defineComponent({
         title: undefined
       }
 
-      const { wrapClassName = '' } = opt
-      const className = unref(fullScreenRef) ? `${wrapClassName} fullscreen-modal` : wrapClassName
-
       return {
-        ...opt,
-        wrapClassName: className
+        ...opt
       }
     })
 
-
+    // 监测props.visible的变化，修改visibleRef
     watchEffect(() => {
       visibleRef.value = !!props.visible
     })
 
+    // 根据visibleRef的变化，通知调用发visible-change
     watch(
       () => unref(visibleRef),
       (v: boolean) => {
@@ -60,16 +51,7 @@ export default defineComponent({
       }
     )
 
-    // 渲染标题
-    // function renderTitle() {
-    //   const { helpMessage } = unref(getProps)
-    //   const { title } = unref(getMergeProps)
-    //   return (
-    //     <BasicTitle helpMessage={helpMessage}>
-    //       {() => (slots.title ? getSlot(slots, 'title') : title)}
-    //     </BasicTitle>
-    //   )
-    // }
+    
 
     // 取消事件
     async function handleCancel(e: Event) {
@@ -103,7 +85,7 @@ export default defineComponent({
         onCancel={handleCancel}
         {...{ ...attrs, ...props, ...unref(getProps) }}
       >
-        <p>ssss</p>
+        坎坎坷坷
       </Modal>
     )
   }
