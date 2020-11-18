@@ -6,6 +6,48 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "14063085",
+      "name": "add car",
+      "font_class": "adddir",
+      "unicode": "e63c",
+      "unicode_decimal": 58940
+    },
+    {
+      "icon_id": "18039285",
+      "name": "sidebar-off",
+      "font_class": "sidebar_off",
+      "unicode": "e60b",
+      "unicode_decimal": 58891
+    },
+    {
+      "icon_id": "18039204",
+      "name": "sidebar-on-01",
+      "font_class": "sidebar_on",
+      "unicode": "e609",
+      "unicode_decimal": 58889
+    },
+    {
+      "icon_id": "1462899",
+      "name": "list",
+      "font_class": "dirlist",
+      "unicode": "e633",
+      "unicode_decimal": 58931
+    },
+    {
+      "icon_id": "7049961",
+      "name": "sidebar-setting",
+      "font_class": "setting",
+      "unicode": "e63a",
+      "unicode_decimal": 58938
+    },
+    {
+      "icon_id": "10254794",
+      "name": "sidebar-Home",
+      "font_class": "sidebar-Home",
+      "unicode": "e754",
+      "unicode_decimal": 59220
+    },
+    {
       "icon_id": "4678340",
       "name": "close",
       "font_class": "close1",

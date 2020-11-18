@@ -5,6 +5,7 @@ import { Modal } from 'ant-design-vue';
 import { buildUUID } from '@/utils/uuid';
 import { deepMerge } from '@/utils';
 import { isFunction } from '@/utils/is';
+import { getSlot } from '@/utils/helper/tsxHelper';
 
 export default defineComponent({
   name: 'BasicModal',
@@ -14,6 +15,7 @@ export default defineComponent({
 
     const visibleRef = ref(false)
     const propsRef = ref<Partial<ModalProps> | null>(null)
+    
 
     const getMergeProps = computed(() => {
       return {
@@ -27,7 +29,7 @@ export default defineComponent({
         ...props,
         ...((unref(propsRef) || {}) as any),
         visible: unref(visibleRef),
-        title: undefined
+        // title: undefined
       }
 
       return {
@@ -80,12 +82,17 @@ export default defineComponent({
     console.log('register')
     emit('register', modalMethods, uuid)
 
+    const renderContent = () =>{
+      const children = getSlot(slots)
+      return children
+    }
+
     return () => (
       <Modal
         onCancel={handleCancel}
         {...{ ...attrs, ...props, ...unref(getProps) }}
       >
-        坎坎坷坷
+        {renderContent()}
       </Modal>
     )
   }
