@@ -66,6 +66,17 @@ export default defineComponent({
       visibleRef.value = false
       emit('cancel')
     }
+    // 确认事件
+    async function handleOk(e: Event) {
+      e && e.stopPropagation()
+      if (props.okFunc && isFunction(props.okFunc)) {
+        const isClose: boolean = await props.okFunc()
+        visibleRef.value = !isClose
+        return
+      }
+      visibleRef.value = false
+      emit('ok')
+    }
 
     // 设置modal参数
     function setModalProps(props: Partial<ModalProps>): void {
@@ -90,6 +101,7 @@ export default defineComponent({
     return () => (
       <Modal
         onCancel={handleCancel}
+        onOk = {handleOk}
         {...{ ...attrs, ...props, ...unref(getProps) }}
       >
         {renderContent()}

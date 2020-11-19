@@ -18,7 +18,8 @@ export const modalProps = {
     type: String as PropType<string>,
     default: '保存'
   },
-  closeFunc: Function as PropType<() => Promise<boolean>>
+  closeFunc: Function as PropType<() => Promise<boolean>>,
+  okFunc: Function as PropType<() => Promise<boolean>>
 }
 
 export const basicProps = Object.assign({}, modalProps, {

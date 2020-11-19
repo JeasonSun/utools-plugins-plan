@@ -1,8 +1,10 @@
-import { getProjectListApi } from '@/api/project'
-import { ProjectTypeEnum } from '@/enums/projectTypeEnum'
+import { getProjectListApi ,addProjectListApi} from '@/api/project'
+import { defaultProject } from '@/constant/default'
 import store from '@/store'
+import { ProjectInfo } from '@/types/project'
 import { hotModuleUnregisterModule } from '@/utils/helper/vuexHelper'
 import { isArray } from '@/utils/is'
+
 import {
   Action,
   getModule,
@@ -14,46 +16,6 @@ import {
 const NAME = 'project'
 hotModuleUnregisterModule(NAME)
 
-const defaultProject: ProjectInfo = {
-  type: ProjectTypeEnum.PROJECT,
-  name: '默认项目',
-  count: 0,
-  id: 'p_0',
-  children: [
-    {
-      type: ProjectTypeEnum.LIST,
-      name: '重要且紧急',
-      count: 0,
-      id: 'p_0_1',
-    },
-    {
-      type: ProjectTypeEnum.LIST,
-      name: '重要不紧急',
-      count: 0,
-      id: 'p_0_2',
-    },
-    {
-      type: ProjectTypeEnum.LIST,
-      name: '不重要但紧急',
-      count: 0,
-      id: 'p_0_3',
-    },
-    {
-      type: ProjectTypeEnum.LIST,
-      name: '不重要且不紧急',
-      count: 0,
-      id: 'p_0_4',
-    }
-  ]
-}
-
-export interface ProjectInfo {
-  type: ProjectTypeEnum.PROJECT | ProjectTypeEnum.LIST;
-  name: string;
-  count: number;
-  id: string;
-  children?: ProjectInfo[];
-}
 
 export interface ProjectState {
   needDefaultList: boolean;
@@ -85,6 +47,7 @@ class Project extends VuexModule {
   @Action
   async getListAction() {
     let list = await getProjectListApi()
+    
     list = isArray(list) ? list : []
     let result
     if (this.needDefaultList) {
@@ -104,6 +67,12 @@ class Project extends VuexModule {
     const list = this.list.filter(item => item.id === id) || []
     const result = list[0].children || []
     return result
+  }
+
+  @Action
+  async addDirAction(name: string) {
+    const newList = await addProjectListApi(name);
+    this.commitList(newList)
   }
 
   

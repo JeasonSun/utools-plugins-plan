@@ -22,7 +22,7 @@
           <i class="iconfont iconadddir" />
         </div>
       </div>
-      <AddDirModal @register="registerAddDirModal" />
+      <AddDirModal @register="registerAddDirModal" @after-add="afterAddDir" />
     </div>
   </BasicModal>
 </template>
@@ -43,8 +43,16 @@ export default defineComponent({
 
     const [registerAddDirModal, dirModal] = useModal()
 
-    function addDir(){
+    // 打开添加文件夹的弹窗
+    function addDir() {
       dirModal.openModal()
+    }
+
+    // 添加文件夹事件
+    // 向store中提交新文件夹数据
+    function afterAddDir(dirName: string) {
+      console.log(dirName)
+      projectStore.addDirAction(dirName)
     }
 
     return {
@@ -58,7 +66,8 @@ export default defineComponent({
         return [noDir, ...dir]
       }),
       registerAddDirModal,
-      addDir
+      addDir,
+      afterAddDir
     }
   }
 })

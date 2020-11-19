@@ -24,7 +24,8 @@
 <script lang="ts">
 import { defineComponent, onMounted, ref, toRefs } from 'vue'
 import ListCate from '@/components/sidebar/ListCate.vue'
-import { ProjectInfo, projectStore } from '@/store/modules/project'
+import { projectStore } from '@/store/modules/project'
+import { ProjectInfo } from '@/types/project'
 
 export default defineComponent({
   name: 'ListDir',
