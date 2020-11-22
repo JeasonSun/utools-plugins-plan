@@ -1,5 +1,4 @@
 import { ProjectTypeEnum } from '@/enums/projectTypeEnum';
-import { ExtraInfo } from '@/types/common';
 import { ProjectInfo } from "@/types/project";
 
 export const defaultProject: ProjectInfo = {
@@ -33,9 +32,4 @@ export const defaultProject: ProjectInfo = {
       id: 'p_0_4',
     }
   ]
-}
-
-
-export const defaultExtraInfo: ExtraInfo = {
-  new: false
 }

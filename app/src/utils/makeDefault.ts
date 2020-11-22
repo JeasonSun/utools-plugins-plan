@@ -1,11 +1,11 @@
 import { ProjectTypeEnum } from "@/enums/projectTypeEnum";
 import { UserInfo } from '@/types/common';
 import { ProjectInfo } from '@/types/project';
-import { buildUUID } from '@/utils/uuid';
+import { buildUUID,snowUuid } from '@/utils/uuid';
 
 
 export function makeDir(name: string): ProjectInfo {
-  const id = 'p_' + buildUUID();
+  const id = snowUuid('p');
   return {
     type: ProjectTypeEnum.PROJECT,
     name,
@@ -15,11 +15,11 @@ export function makeDir(name: string): ProjectInfo {
 }
 
 export function makeUser(): UserInfo{
-  const uid = buildUUID()
+  const uid = snowUuid('u')
   const user = {
-    id: `user_${uid}`,
-    name: `用户名${uid}`,
-    init: true
+    id: uid,
+    name: `用户名_${uid}`,
+    isNew: true
   }
   return user;
 }

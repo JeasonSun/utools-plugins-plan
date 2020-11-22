@@ -1,7 +1,6 @@
 import { ProjectInfo } from '@/types/project'
 import * as DB from '@/utils/localDb'
 import { makeDir } from '@/utils/makeDefault'
-
 enum API {
   ProjectList = '/getProjectList'
 }
@@ -19,4 +18,8 @@ export async function getProjectListApi(): Promise<ProjectInfo[]> {
 export async function addProjectListApi(name: string): Promise<ProjectInfo[]> {
   const newDir = makeDir(name)
   return await DB.addProject(newDir)
+}
+
+export async function updateStoreListApi(list: ProjectInfo[]): Promise<boolean> {
+  return await DB.updateStoreList(list)
 }

@@ -4,6 +4,19 @@
   </div>
 </template>
 
-<style lang="less">
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { userStore } from '@/store/modules/user'
 
-</style>
+export default defineComponent({
+  name: 'App',
+  setup (props, context) {
+    async function checkUser () {
+      await userStore.getUserInfo()
+    }
+    checkUser()
+  }
+})
+</script>
+
+<style lang="less"></style>

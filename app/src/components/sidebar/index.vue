@@ -22,7 +22,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, onMounted } from 'vue'
 import Toolbar from '@/components/sidebar/Toolbar.vue'
 import ListCate from '@/components/sidebar/ListCate.vue'
 import ListContainer from '@/components/sidebar/ListContainer.vue'
@@ -40,10 +40,11 @@ export default defineComponent({
   },
   props: {},
   setup (props, context) {
+
     /**
      * 将registerAddListModal注册方法传递给BasicModal，
      * 在BasicModal中会把基础Modal的
-     * 
+     *
      */
     const [registerAddListModal, listModal] = useModal()
 
