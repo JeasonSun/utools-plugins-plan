@@ -43,19 +43,20 @@ export default defineComponent({
     AddDirModal
   },
   emits: ['after-add'],
-  setup(props, { emit }) {
-
+  setup (props, { emit }) {
     const [registerAddDirModal, dirModal] = useModal()
-    const { toast } = useMessage();
+    const { toast } = useMessage()
     const selectIdRef = ref<Nullable<string>>(null)
-    const valueRef = ref('');
+    const valueRef = ref('')
 
     const dirList = computed(() => {
-      const dir = projectStore.list.filter(item => item.type === ProjectTypeEnum.PROJECT)
+      const dir = projectStore.list.filter(
+        item => item.type === ProjectTypeEnum.PROJECT
+      )
       const noDir = {
         name: '无',
         type: 'EMPTY_DIR',
-        id: NO_DIR_ID,
+        id: NO_DIR_ID
       }
       return [noDir, ...dir]
     })
@@ -70,39 +71,37 @@ export default defineComponent({
     })
 
     // 打开添加文件夹的弹窗
-    function addDir() {
+    function addDir () {
       dirModal.openModal()
     }
 
     // 添加文件夹事件
     // 向store中提交新文件夹数据
-    function afterAddDir(dirName: string) {
+    function afterAddDir (dirName: string) {
       console.log(dirName)
       projectStore.addDirAction(dirName)
     }
 
-    function handleChange(value: string) {
+    function handleChange (value: string) {
       selectIdRef.value = value
     }
 
-    function onOk() {
-
-      const value = unref(valueRef);
-      const dirId = unref(selectIdRef);
+    function onOk () {
+      const value = unref(valueRef)
+      const dirId = unref(selectIdRef)
       if (!value || !value.length || !dirId) {
-        toast.error('请输入文件夹名称');
-        return false;
+        toast.error('请输入文件夹名称')
+        return false
       } else {
-        projectStore.addListByDirId( {
-          listName: value, 
+        projectStore.addListByDirId({
+          listName: value,
           dirId: dirId
         })
         // emit('after-add', value)
-        return true;
+        valueRef.value = ''
+        return true
       }
     }
-
-
 
     return {
       list: dirList,
@@ -119,7 +118,7 @@ export default defineComponent({
 </script>
 
 <style lang="less">
-@import (reference) "../../styles/rule.less";
+@import (reference) '../../styles/rule.less';
 
 .add-list-modal__container {
   .add-list-modal__item {

@@ -4,10 +4,10 @@
       <Toolbar />
     </div>
     <div class="sidebar-cate-flex-container">
-      <ListCate icon="box" name="收集箱" />
-      <ListCate icon="daiban" name="今天" />
-      <ListCate icon="done" name="已完成" />
-      <ListCate icon="star" name="标星" />
+      <ListCate icon="box" name="待归类" id="tl_1"/>
+      <ListCate icon="daiban" name="今天"  id="tl_2"/>
+      <ListCate icon="done" name="已完成"  id="tl_3"/>
+      <ListCate icon="star" name="标星"  id="tl_4"/>
     </div>
     <div class="sidebar-list-flex-container">
       <ListContainer />

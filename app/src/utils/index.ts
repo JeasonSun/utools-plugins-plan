@@ -63,3 +63,11 @@ export function unique<T = any>(arr: T[], key: string): T[] {
 export function es6Unique<T>(arr: T[]): T[] {
   return Array.from(new Set(arr));
 }
+
+/**
+ * 操作localForage时候不能用响应式数据，所以转换一下
+ * @param obj 
+ */
+export function toRawObj(obj: any) {
+  return JSON.parse(JSON.stringify(obj));
+}

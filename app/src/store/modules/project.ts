@@ -1,7 +1,7 @@
 import { getProjectListApi, addProjectListApi, updateStoreListApi } from '@/api/project'
 import { defaultProject, NO_DIR_ID } from '@/constant/default'
 import store from '@/store'
-import { AddListParam, ProjectInfo } from '@/types/project'
+import { AddListParam, ChangeOpenStateParam, ProjectInfo } from '@/types/project'
 import { hotModuleUnregisterModule } from '@/utils/helper/vuexHelper'
 import { isArray } from '@/utils/is'
 import { userStore } from '@/store/modules/user';
@@ -16,6 +16,7 @@ import {
   VuexModule
 } from 'vuex-module-decorators'
 import { makeList } from '@/utils/makeDefault'
+import { toRawObj } from '@/utils'
 
 const NAME = 'project'
 hotModuleUnregisterModule(NAME)
@@ -23,15 +24,15 @@ hotModuleUnregisterModule(NAME)
 const { toast } = useMessage()
 
 export interface ProjectState {
-  needDefaultList: boolean;
   list: ProjectInfo[];
+  activeId: Nullable<string>;
 }
 
 @Module({ dynamic: true, namespaced: true, store, name: NAME })
 class Project extends VuexModule {
   // state 
-  needDefaultList: ProjectState['needDefaultList'] = true
   list: ProjectState['list'] = []
+  activeId: ProjectState['activeId'] = null
 
 
   // getter
@@ -41,7 +42,16 @@ class Project extends VuexModule {
   //   return result
   // }
 
+  @Mutation
+  commitActiveList(listId: string): void {
+    this.activeId = listId;
+  }
 
+  /**
+   * 去除此方法， 需要在每次提交的state的时候存储一次
+   * 使用： commitAndStoreList
+   * @param list 
+   */
   @Mutation
   commitList(list: ProjectInfo[]): void {
     this.list = [...list]
@@ -51,11 +61,14 @@ class Project extends VuexModule {
   // 并且更新 state
   @MutationAction({ mutate: ['list'] })
   async commitAndStoreList(list: ProjectInfo[]) {
-    await updateStoreListApi(list)
+    const ListRaw = toRawObj(list);
+    await updateStoreListApi(ListRaw)
     return {
-      list: [...list]
+      list: [...ListRaw]
     }
   }
+
+
 
   /**
    * 获取左侧清单列表
@@ -96,12 +109,12 @@ class Project extends VuexModule {
   @Action
   async addDirAction(name: string) {
     const newList = await addProjectListApi(name);
-    this.commitList(newList)
+    this.commitAndStoreList(newList)
   }
 
   @Action
   async addListByDirId(param: AddListParam) {
-    
+
     const { listName, dirId } = param;
     console.log('更新lIST', listName, dirId)
     let updated = false;
@@ -127,9 +140,20 @@ class Project extends VuexModule {
     if (updated) {
       console.log('需要更新list', dirList)
       // this.commitList([...dirList])
-      //TODO: 这里有问题
       this.commitAndStoreList([...dirList])
     }
+  }
+
+  @Action
+  async changeDirOpenStateAction(param: ChangeOpenStateParam) {
+    const { dirId, openState } = param;
+    const newList = this.list.map(item => {
+      if (item.id === dirId) {
+        item.open = openState
+      }
+      return item
+    })
+    this.commitAndStoreList([...newList])
   }
 
 

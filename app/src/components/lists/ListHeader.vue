@@ -1,9 +1,12 @@
 <template>
   <div class="app-mainlist-header">
-    <div class="mainlist-header__icon">
-      <span class="iconfont iconlist"></span>
+    <div class="mainlist-header__icon" @click="toggleOpen">
+      <span
+        class="iconfont"
+        :class="[isOpen ? 'iconsidebar_on' : 'iconsidebar_off']"
+      ></span>
     </div>
-    <div class="mainlist-header__title">测试文件夹</div>
+    <div class="mainlist-header__title">ID: {{ listId }}</div>
     <div class="mainlist-header__setting">
       <span class="iconfont icondot"></span>
     </div>
@@ -11,15 +14,27 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { projectStore } from '@/store/modules/project'
+import { computed, defineComponent, ref } from 'vue'
 
 export default defineComponent({
   name: 'ListHeader',
-  props: {
-  },
-});
+  props: {},
+  setup () {
+    const isOpen = ref(true)
+    const toggleOpen = () => {
+      console.log('toggle')
+      isOpen.value = !isOpen.value
+    }
+
+    return {
+      listId: computed(() => projectStore.activeId),
+      isOpen,
+      toggleOpen
+    }
+  }
+})
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="less">
-</style>
+<style scoped lang="less"></style>

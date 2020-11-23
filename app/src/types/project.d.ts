@@ -3,10 +3,17 @@ export interface ProjectInfo {
   name: string;
   count: number;
   id: string;
+  open?: boolean;
+  icon?: string;
   children?: ProjectInfo[];
 }
 
-export interface AddListParam{
+export interface AddListParam {
   listName: string;
   dirId: string;
+}
+
+export interface ChangeOpenStateParam {
+  dirId: string;
+  openState: boolean;
 }

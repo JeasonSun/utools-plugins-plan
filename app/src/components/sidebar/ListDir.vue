@@ -19,7 +19,7 @@
         :trigger="['click']"
         placement="bottomCenter"
         @visibleChange="visibleChange"
-        @click="(e) => e.preventDefault()"
+        @click="e => e.preventDefault()"
       >
         <div class="sidebar-list__action list-dir">
           <i class="iconfont iconaction" />
@@ -41,7 +41,7 @@
       </div>
     </div>
     <div class="sidebar-list__dir-list">
-      <ListCate :name="item.name" :key="item.id" v-for="item in subList" />
+      <ListCate :name="item.name" :key="item.id" :id="item.id" v-for="item in subList" />
     </div>
   </div>
   <DelConfirm
@@ -53,7 +53,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, ref, toRefs } from 'vue'
+import { computed, defineComponent, onMounted, ref, toRefs, unref, watchEffect } from 'vue'
 import ListCate from '@/components/sidebar/ListCate.vue'
 import DelConfirm from '@/components/sidebar/DelConfirm.vue'
 import { projectStore } from '@/store/modules/project'
@@ -82,11 +82,15 @@ export default defineComponent({
     child: {
       type: Array,
       default: () => []
+    },
+    open: {
+      type: Boolean,
+      default: false
     }
   },
-  setup(props) {
-    const { id, name, count, child } = toRefs(props)
-    const isOpen = ref(false)
+  setup (props) {
+    const { id, name, count, child, open } = toRefs(props)
+    const isOpen = ref(open.value)
     const isActionMenuOpen = ref(false)
     const content = ref('')
     const subList = ref<ProjectInfo[]>([])
@@ -94,8 +98,18 @@ export default defineComponent({
     const [registerDelConfirm, delConfirm] = useModal()
 
     const toggleDir = () => {
-      isOpen.value = !isOpen.value
+      const openState = !isOpen.value
+      // TODO: 展开状态理论上也应该记录一次
+      projectStore.changeDirOpenStateAction({
+        dirId: id.value,
+        openState
+      })
     }
+
+    watchEffect(() => {
+      const openState = unref(open)
+      isOpen.value = openState
+    })
     // const getListByDirId = async (id: string) => {
     //   const childList = await projectStore.getListByDirIdAction(id)
     //   subList.value = childList
@@ -129,7 +143,6 @@ export default defineComponent({
       content.value = `解散后，文件夹（${name.value}）中的清单将直接显示在侧边栏。`
     }
 
-
     onMounted(() => {
       // getListByDirId(id.value)
       // 设置默认的确认弹窗的信息
@@ -146,7 +159,7 @@ export default defineComponent({
       deleteDir,
       registerDelConfirm,
       content,
-      onConfirm,
+      onConfirm
     }
   }
 })

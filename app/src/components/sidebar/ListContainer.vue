@@ -7,31 +7,39 @@
       <ListCate
         :name="item.name"
         :key="item.id"
+        :id="item.id"
         v-if="item.type === ProjectTypeEnum.LIST"
       />
-      <ListDir :name="item.name" :key="item.id" v-if="item.type === ProjectTypeEnum.PROJECT" :id="item.id" :child="item.children"/>
+      <ListDir
+        :name="item.name"
+        :key="item.id"
+        v-if="item.type === ProjectTypeEnum.PROJECT"
+        :id="item.id"
+        :child="item.children"
+        :open="item.open"
+      />
     </template>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted } from 'vue';
+import { computed, defineComponent, onMounted } from 'vue'
 // import { mapState} from 'vuex';
-import ListDir from '@/components/sidebar/ListDir.vue';
-import ListCate from '@/components/sidebar/ListCate.vue';
-import { projectStore } from '@/store/modules/project';
+import ListDir from '@/components/sidebar/ListDir.vue'
+import ListCate from '@/components/sidebar/ListCate.vue'
+import { projectStore } from '@/store/modules/project'
 import { ProjectTypeEnum } from '@/enums/projectTypeEnum'
-
 
 export default defineComponent({
   name: 'ListContainer',
   components: {
-    ListDir, ListCate
+    ListDir,
+    ListCate
   },
   // 用来规范props的类型
-  // props: {  
+  // props: {
   // },
-  setup() {
+  setup () {
     const getProjectList = async () => {
       await projectStore.getListAction()
       console.log('methods', projectStore.list)
@@ -42,14 +50,14 @@ export default defineComponent({
     return {
       ProjectTypeEnum,
       list: computed(() => {
-        console.log(projectStore.list,'===+++++')
+        console.log(projectStore.list, '===+++++')
         return projectStore.list
       })
     }
   }
 
   // computed: mapState({
-  //   list: 
+  //   list:
   // }),
   // created(){
   //   this.getProjectList()
@@ -63,9 +71,8 @@ export default defineComponent({
 
   //   }
   // }
-});
+})
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="less">
-</style>
+<style scoped lang="less"></style>

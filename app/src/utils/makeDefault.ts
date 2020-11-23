@@ -13,7 +13,8 @@ export function makeDir(name: string): ProjectInfo {
     type: ProjectTypeEnum.PROJECT,
     name,
     count: 0,
-    id
+    id,
+    open: true
   }
 }
 
