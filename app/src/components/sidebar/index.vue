@@ -17,7 +17,7 @@
         <span class="iconfont iconadd"></span>
       </div>
     </div>
-    <AddListModal @register="registerAddListModal" />
+    <AddListModal @register="registerAddListModal" @after-add="afterAddList"  />
   </div>
 </template>
 
@@ -55,9 +55,13 @@ export default defineComponent({
       listModal.openModal()
       // context.$message.info('This is a normal message');
     }
+    const afterAddList = () => {
+      console.log('完成清单的添加')
+    }
     return {
       addList,
-      registerAddListModal
+      registerAddListModal,
+      afterAddList
     }
   }
 })

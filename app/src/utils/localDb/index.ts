@@ -25,10 +25,10 @@ export async function getProjectList(): Promise<ProjectInfo[]> {
 }
 
 export async function addProject(newDir: ProjectInfo): Promise<ProjectInfo[]> {
-  let list: ProjectInfo[] | null = await localStore.getItem('projectList')
+  let list: ProjectInfo[] | null = await localList.getItem('projectList')
   list = isArray(list) ? list : []
   const newList = [newDir, ...list];
-  await localStore.setItem('projectList', newList)
+  await localList.setItem('projectList', newList)
   return newList
 }
 

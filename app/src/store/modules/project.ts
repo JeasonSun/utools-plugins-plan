@@ -1,10 +1,11 @@
 import { getProjectListApi, addProjectListApi, updateStoreListApi } from '@/api/project'
-import { defaultProject } from '@/constant/default'
+import { defaultProject, NO_DIR_ID } from '@/constant/default'
 import store from '@/store'
-import { ProjectInfo } from '@/types/project'
+import { AddListParam, ProjectInfo } from '@/types/project'
 import { hotModuleUnregisterModule } from '@/utils/helper/vuexHelper'
 import { isArray } from '@/utils/is'
 import { userStore } from '@/store/modules/user';
+import { useMessage } from '@/hooks/web/useMessage'
 
 import {
   Action,
@@ -14,10 +15,12 @@ import {
   MutationAction,
   VuexModule
 } from 'vuex-module-decorators'
+import { makeList } from '@/utils/makeDefault'
 
 const NAME = 'project'
 hotModuleUnregisterModule(NAME)
 
+const { toast } = useMessage()
 
 export interface ProjectState {
   needDefaultList: boolean;
@@ -44,6 +47,8 @@ class Project extends VuexModule {
     this.list = [...list]
   }
 
+  // 直接更新localStore中的list，
+  // 并且更新 state
   @MutationAction({ mutate: ['list'] })
   async commitAndStoreList(list: ProjectInfo[]) {
     await updateStoreListApi(list)
@@ -70,7 +75,6 @@ class Project extends VuexModule {
     // this.commitList(result)
     this.commitAndStoreList(result)
     // 更新用户信息，isNew = false
-    console.log('我想知道这里有id了么', userStore.id)
     userStore.storeAndUpdateIsNew(false)
   }
 
@@ -85,10 +89,47 @@ class Project extends VuexModule {
     return result
   }
 
+  /**
+   * 创建一个新的文件夹
+   * @param name 文件夹的名称
+   */
   @Action
   async addDirAction(name: string) {
     const newList = await addProjectListApi(name);
     this.commitList(newList)
+  }
+
+  @Action
+  async addListByDirId(param: AddListParam) {
+    
+    const { listName, dirId } = param;
+    console.log('更新lIST', listName, dirId)
+    let updated = false;
+    let dirList;
+    const newList = makeList(listName)
+
+    if (dirId === NO_DIR_ID) {
+      updated = true;
+      dirList = [newList, ...this.list]
+    } else {
+      dirList = this.list.map(item => {
+        if (item.id === dirId) {
+          updated = true;
+          const child = item.children || []
+
+          item.children = [newList, ...child]
+        }
+        return item
+      })
+    }
+
+
+    if (updated) {
+      console.log('需要更新list', dirList)
+      // this.commitList([...dirList])
+      //TODO: 这里有问题
+      this.commitAndStoreList([...dirList])
+    }
   }
 
 

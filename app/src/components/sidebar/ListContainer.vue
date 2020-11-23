@@ -9,7 +9,7 @@
         :key="item.id"
         v-if="item.type === ProjectTypeEnum.LIST"
       />
-      <ListDir :name="item.name" :key="item.id" v-if="item.type === ProjectTypeEnum.PROJECT" :id="item.id"/>
+      <ListDir :name="item.name" :key="item.id" v-if="item.type === ProjectTypeEnum.PROJECT" :id="item.id" :child="item.children"/>
     </template>
   </div>
 </template>
@@ -41,7 +41,10 @@ export default defineComponent({
 
     return {
       ProjectTypeEnum,
-      list: computed(() => projectStore.list)
+      list: computed(() => {
+        console.log(projectStore.list,'===+++++')
+        return projectStore.list
+      })
     }
   }
 

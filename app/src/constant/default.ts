@@ -33,3 +33,5 @@ export const defaultProject: ProjectInfo = {
     }
   ]
 }
+
+export const NO_DIR_ID = 'no_dir';

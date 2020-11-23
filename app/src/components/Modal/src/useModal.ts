@@ -19,8 +19,6 @@ export function useModal(): UseModalReturnType {
    */
   function register(modalMethod: ModalMethods, uuid: string) {
     uidRef.value = uuid
-    console.log('register ....', uuid)
-
     onUnmounted(() => {
       modalRef.value = null
       loadedRef.value = false
@@ -28,8 +26,6 @@ export function useModal(): UseModalReturnType {
     })
 
     if (unref(loadedRef) && modalMethod === unref(modalRef)) return
-
-    console.log('register success')
 
     modalRef.value = modalMethod
   }

@@ -3,14 +3,12 @@ import { getCurrentUserApi, updateUserInfoApi } from '@/api/user'
 import store from '@/store'
 import { UserInfo } from '@/types/common'
 import { hotModuleUnregisterModule } from '@/utils/helper/vuexHelper'
-import { isBoolean } from '@/utils/is'
 
 import {
   Action,
   getModule,
   Module,
   Mutation,
-  MutationAction,
   VuexModule
 } from 'vuex-module-decorators'
 

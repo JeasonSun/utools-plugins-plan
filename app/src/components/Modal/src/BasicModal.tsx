@@ -90,7 +90,6 @@ export default defineComponent({
     }
 
     const uuid = buildUUID()
-    console.log('register')
     emit('register', modalMethods, uuid)
 
     const renderContent = () =>{

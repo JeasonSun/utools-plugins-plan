@@ -5,3 +5,8 @@ export interface ProjectInfo {
   id: string;
   children?: ProjectInfo[];
 }
+
+export interface AddListParam{
+  listName: string;
+  dirId: string;
+}

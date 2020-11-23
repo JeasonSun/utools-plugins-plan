@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "7404500",
+      "name": "more",
+      "font_class": "action",
+      "unicode": "e675",
+      "unicode_decimal": 58997
+    },
+    {
       "icon_id": "14063085",
       "name": "add car",
       "font_class": "adddir",
