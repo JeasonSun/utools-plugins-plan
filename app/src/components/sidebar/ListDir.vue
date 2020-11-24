@@ -41,7 +41,7 @@
       </div>
     </div>
     <div class="sidebar-list__dir-list">
-      <ListCate :name="item.name" :key="item.id" :id="item.id" v-for="item in subList" />
+      <ListCate :name="item.name" :key="item.id" :id="item.id"  :parent="item.parent" v-for="item in subList" />
     </div>
   </div>
   <DelConfirm
@@ -57,7 +57,6 @@ import { computed, defineComponent, onMounted, ref, toRefs, unref, watchEffect }
 import ListCate from '@/components/sidebar/ListCate.vue'
 import DelConfirm from '@/components/sidebar/DelConfirm.vue'
 import { projectStore } from '@/store/modules/project'
-import { ProjectInfo } from '@/types/project'
 import { useModal } from '../Modal'
 
 export default defineComponent({
@@ -93,7 +92,6 @@ export default defineComponent({
     const isOpen = ref(open.value)
     const isActionMenuOpen = ref(false)
     const content = ref('')
-    const subList = ref<ProjectInfo[]>([])
 
     const [registerDelConfirm, delConfirm] = useModal()
 
@@ -123,7 +121,7 @@ export default defineComponent({
     }
 
     const onConfirm = () => {
-      console.log('文件夹被解散', name.value)
+      console.log('文件夹被解散', name.value, id.value)
     }
 
     const deleteDir = () => {
@@ -140,7 +138,7 @@ export default defineComponent({
     }
 
     const setConfirmInfo = () => {
-      content.value = `解散后，文件夹（${name.value}）中的清单将直接显示在侧边栏。`
+      content.value = `确认解散文件夹（${name.value}）吗？解散后，文件夹中的清单将直接显示在侧边栏。`
     }
 
     onMounted(() => {
@@ -151,6 +149,7 @@ export default defineComponent({
 
     return {
       isOpen,
+      dirId: id,
       subList: computed(() => child.value),
       toggleDir,
       isActionMenuOpen,

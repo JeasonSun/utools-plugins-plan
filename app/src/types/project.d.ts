@@ -5,6 +5,7 @@ export interface ProjectInfo {
   id: string;
   open?: boolean;
   icon?: string;
+  parent?: string;
   children?: ProjectInfo[];
 }
 
@@ -16,4 +17,9 @@ export interface AddListParam {
 export interface ChangeOpenStateParam {
   dirId: string;
   openState: boolean;
+}
+
+export interface DeleteListParam {
+  listId: string;
+  dirId: string;
 }

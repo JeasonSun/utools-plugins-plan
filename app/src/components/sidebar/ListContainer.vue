@@ -8,6 +8,7 @@
         :name="item.name"
         :key="item.id"
         :id="item.id"
+        :parent="item.parent"
         v-if="item.type === ProjectTypeEnum.LIST"
       />
       <ListDir
@@ -39,7 +40,7 @@ export default defineComponent({
   // 用来规范props的类型
   // props: {
   // },
-  setup () {
+  setup() {
     const getProjectList = async () => {
       await projectStore.getListAction()
       console.log('methods', projectStore.list)
@@ -50,7 +51,6 @@ export default defineComponent({
     return {
       ProjectTypeEnum,
       list: computed(() => {
-        console.log(projectStore.list, '===+++++')
         return projectStore.list
       })
     }

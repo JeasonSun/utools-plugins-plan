@@ -1,10 +1,10 @@
 <template>
   <div class="app-mainlist-header">
     <div class="mainlist-header__icon" @click="toggleOpen">
-      <span
+      <!-- <span
         class="iconfont"
         :class="[isOpen ? 'iconsidebar_on' : 'iconsidebar_off']"
-      ></span>
+      ></span> -->
     </div>
     <div class="mainlist-header__title">ID: {{ listId }}</div>
     <div class="mainlist-header__setting">

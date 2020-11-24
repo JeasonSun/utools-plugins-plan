@@ -33,7 +33,7 @@ import { BasicModal, useModal } from '@/components/Modal'
 import { projectStore } from '@/store/modules/project'
 import { ProjectTypeEnum } from '@/enums/projectTypeEnum'
 import AddDirModal from './AddDirModal.vue'
-import { NO_DIR_ID } from '@/constant/default'
+import { ROOT_LEVEL } from '@/constant/default'
 import { useMessage } from '@/hooks/web/useMessage'
 
 export default defineComponent({
@@ -56,7 +56,7 @@ export default defineComponent({
       const noDir = {
         name: '无',
         type: 'EMPTY_DIR',
-        id: NO_DIR_ID
+        id: ROOT_LEVEL
       }
       return [noDir, ...dir]
     })

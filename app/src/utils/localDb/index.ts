@@ -33,7 +33,6 @@ export async function addProject(newDir: ProjectInfo): Promise<ProjectInfo[]> {
 }
 
 export async function updateStoreList(list: ProjectInfo[]): Promise<boolean> {
-  console.log(list, '===cuncun')
   if (list && isArray(list)) {
     await localList.setItem('projectList', list)
     return true

@@ -1,7 +1,7 @@
 import { getProjectListApi, addProjectListApi, updateStoreListApi } from '@/api/project'
-import { defaultProject, NO_DIR_ID } from '@/constant/default'
+import { defaultProject, ROOT_LEVEL } from '@/constant/default'
 import store from '@/store'
-import { AddListParam, ChangeOpenStateParam, ProjectInfo } from '@/types/project'
+import { AddListParam, ChangeOpenStateParam, DeleteListParam, ProjectInfo } from '@/types/project'
 import { hotModuleUnregisterModule } from '@/utils/helper/vuexHelper'
 import { isArray } from '@/utils/is'
 import { userStore } from '@/store/modules/user';
@@ -119,9 +119,9 @@ class Project extends VuexModule {
     console.log('更新lIST', listName, dirId)
     let updated = false;
     let dirList;
-    const newList = makeList(listName)
+    const newList = makeList(listName, dirId)
 
-    if (dirId === NO_DIR_ID) {
+    if (dirId === ROOT_LEVEL) {
       updated = true;
       dirList = [newList, ...this.list]
     } else {
@@ -131,6 +131,7 @@ class Project extends VuexModule {
           const child = item.children || []
 
           item.children = [newList, ...child]
+          item.open = true
         }
         return item
       })
@@ -154,6 +155,13 @@ class Project extends VuexModule {
       return item
     })
     this.commitAndStoreList([...newList])
+  }
+
+  // 删除清单
+  @Action
+  async deleteListByIdAction(param: DeleteListParam) {
+    const { listId, dirId } = param;
+
   }
 
 
