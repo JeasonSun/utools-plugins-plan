@@ -90,7 +90,7 @@ export default defineComponent({
       const value = unref(valueRef)
       const dirId = unref(selectIdRef)
       if (!value || !value.length || !dirId) {
-        toast.error('请输入文件夹名称')
+        toast.error('请输入清单名称')
         return false
       } else {
         projectStore.addListByDirId({

@@ -1,4 +1,4 @@
-import { getProjectListApi, addProjectListApi, updateStoreListApi } from '@/api/project'
+import { getProjectListApi, addProjectListApi } from '@/api/project'
 import { defaultProject, ROOT_LEVEL } from '@/constant/default'
 import store from '@/store'
 import { AddListParam, ChangeOpenStateParam, DeleteListParam, ProjectInfo } from '@/types/project'
@@ -12,11 +12,9 @@ import {
   getModule,
   Module,
   Mutation,
-  MutationAction,
   VuexModule
 } from 'vuex-module-decorators'
 import { makeList } from '@/utils/makeDefault'
-import { toRawObj } from '@/utils'
 
 const NAME = 'project'
 hotModuleUnregisterModule(NAME)
@@ -30,17 +28,9 @@ export interface ProjectState {
 
 @Module({ dynamic: true, namespaced: true, store, name: NAME })
 class Project extends VuexModule {
-  // state 
+
   list: ProjectState['list'] = []
   activeId: ProjectState['activeId'] = null
-
-
-  // getter
-  // get subList(): ProjectState['list'] {
-  //   const list = this.list.filter(item => item.id === id) || []
-  //   const result = list[0].children || []
-  //   return result
-  // }
 
   @Mutation
   commitActiveList(listId: string): void {
@@ -57,66 +47,15 @@ class Project extends VuexModule {
     this.list = [...list]
   }
 
-  // 直接更新localStore中的list，
-  // 并且更新 state
-  @MutationAction({ mutate: ['list'] })
-  async commitAndStoreList(list: ProjectInfo[]) {
-    const ListRaw = toRawObj(list);
-    await updateStoreListApi(ListRaw)
-    return {
-      list: [...ListRaw]
-    }
-  }
-
-
-
   /**
-   * 获取左侧清单列表
+   * 在某个文件夹下添加清单
+   * @param param.listName 清单名称
+   * @param param.dirId 文件夹ID
    */
-  @Action
-  async getListAction() {
-    const isNew = userStore.isNew
-    let list = await getProjectListApi()
-
-    list = isArray(list) ? list : []
-    let result
-    if (isNew) {
-      result = [defaultProject, ...list]
-    } else {
-      result = [...list]
-    }
-    // this.commitList(result)
-    this.commitAndStoreList(result)
-    // 更新用户信息，isNew = false
-    userStore.storeAndUpdateIsNew(false)
-  }
-
-  /**
-   * 根据ID获取子清单列表
-   * @param id 
-   */
-  @Action
-  async getListByDirIdAction(id: string): Promise<ProjectInfo[]> {
-    const list = this.list.filter(item => item.id === id) || []
-    const result = list[0].children || []
-    return result
-  }
-
-  /**
-   * 创建一个新的文件夹
-   * @param name 文件夹的名称
-   */
-  @Action
-  async addDirAction(name: string) {
-    const newList = await addProjectListApi(name);
-    this.commitAndStoreList(newList)
-  }
-
-  @Action
-  async addListByDirId(param: AddListParam) {
+  @Mutation
+  addListByDirId(param: AddListParam) {
 
     const { listName, dirId } = param;
-    console.log('更新lIST', listName, dirId)
     let updated = false;
     let dirList;
     const newList = makeList(listName, dirId)
@@ -136,17 +75,18 @@ class Project extends VuexModule {
         return item
       })
     }
-
-
     if (updated) {
-      console.log('需要更新list', dirList)
-      // this.commitList([...dirList])
-      this.commitAndStoreList([...dirList])
+      this.list = [...dirList]
     }
   }
 
-  @Action
-  async changeDirOpenStateAction(param: ChangeOpenStateParam) {
+  /**
+   * 切换文件夹的展开状态
+   * @param param.dirId 文件夹ID
+   * @param param.openState 文件夹展开状态
+   */
+  @Mutation
+  changeDirOpenStateAction(param: ChangeOpenStateParam) {
     const { dirId, openState } = param;
     const newList = this.list.map(item => {
       if (item.id === dirId) {
@@ -154,16 +94,81 @@ class Project extends VuexModule {
       }
       return item
     })
-    this.commitAndStoreList([...newList])
+    this.list = [...newList]
   }
 
   // 删除清单
-  @Action
-  async deleteListByIdAction(param: DeleteListParam) {
+  @Mutation
+  deleteListByIdAction(param: DeleteListParam) {
     const { listId, dirId } = param;
-
+    let newList;
+    if (dirId === ROOT_LEVEL) {
+      newList = this.list.filter(item => item.id !== listId)
+    } else {
+      newList = this.list.map(item => {
+        if (item.id === dirId) {
+          const child = item.children || []
+          const filterChild = child.filter(childItem => childItem.id !== listId)
+          item.children = [...filterChild]
+        }
+        return item
+      })
+    }
+    this.list = [...newList]
   }
 
+  /**
+   * 解散文件夹
+   * @param dirId 
+   */
+  @Mutation
+  flattenListAction(dirId: string) {
+    let newList: ProjectInfo[] = []
+    this.list.forEach(item => {
+      if (dirId === item.id) {
+        if (item.children && item.children.length) {
+          const child = item.children.map(childItem => {
+            childItem.parent = item.parent
+            return childItem
+          })
+          newList = newList.concat(child)
+        }
+      } else {
+        newList = newList.concat(item)
+      }
+    })
+    this.list = [...newList]
+  }
+
+  /**
+   * 获取左侧清单列表
+   */
+  @Action
+  async getListAction() {
+    const isNew = userStore.isNew
+    let list = await getProjectListApi()
+
+    list = isArray(list) ? list : []
+    let result
+    if (isNew) {
+      result = [defaultProject, ...list]
+    } else {
+      result = [...list]
+    }
+    this.commitList(result)
+    userStore.storeAndUpdateIsNew(false)
+  }
+
+  /**
+   * 创建一个新的文件夹
+   * @param name 文件夹的名称
+   */
+  @Action
+  async addDirAction(name: string) {
+    const newList = await addProjectListApi(name);
+    // this.commitAndStoreList(newList)
+    this.commitList(newList)
+  }
 
 }
 

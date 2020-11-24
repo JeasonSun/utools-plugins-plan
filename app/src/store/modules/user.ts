@@ -44,14 +44,16 @@ class User extends VuexModule {
 
   /**
    * 更新用户登录状态
+   * 0: 未登录   1：已经登录
    */
   @Mutation
   commitUserStatus(status: number): void {
     this.status = status
   }
+
   /**
- * 更新用户isNew
- */
+   * 更新用户isNew
+   */
   @Mutation
   commitUserIsNew(isNew: boolean): void {
     this.isNew = isNew
@@ -72,9 +74,12 @@ class User extends VuexModule {
     }
   }
 
+  /**
+   * 存储并且commit用户的isNew状态
+   * @param isNew 
+   */
   @Action
   async storeAndUpdateIsNew(isNew: boolean) {
-    console.log(this.id, '==========')
     await updateUserInfoApi(this.id, {
       isNew
     })

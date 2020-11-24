@@ -122,6 +122,7 @@ export default defineComponent({
 
     const onConfirm = () => {
       console.log('文件夹被解散', name.value, id.value)
+      projectStore.flattenListAction(id.value)
     }
 
     const deleteDir = () => {

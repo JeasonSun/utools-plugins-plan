@@ -21,5 +21,6 @@ export async function addProjectListApi(name: string): Promise<ProjectInfo[]> {
 }
 
 export async function updateStoreListApi(list: ProjectInfo[]): Promise<boolean> {
+  console.log('DB中更新存储', list)
   return await DB.updateStoreList(list)
 }
