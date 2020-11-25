@@ -3,4 +3,3 @@ config.json
 node_modules
 dist/
 .DS_Store
-ecosystem.config.js
