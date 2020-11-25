@@ -1,7 +1,10 @@
 <template>
   <div
     class="sidebar-list__cate"
-    :class="[isActionMenuOpen ? 'active' : 'normal']"
+    :class="[
+      isActionMenuOpen ? 'active' : 'normal',
+      isSelect ? 'selected' : ''
+    ]"
   >
     <div class="sidebar-list__icon">
       <span :class="`iconfont icon${icon}`"></span>
@@ -14,7 +17,7 @@
       :trigger="['click']"
       placement="bottomCenter"
       @visibleChange="visibleChange"
-      @click="(e) => e.preventDefault()"
+      @click="e => e.preventDefault()"
     >
       <div class="sidebar-list__action list-list">
         <i class="iconfont iconaction" />
@@ -38,7 +41,7 @@
 
 <script lang="ts">
 import { projectStore } from '@/store/modules/project'
-import { defineComponent, onMounted, ref, toRefs } from 'vue'
+import { computed, defineComponent, onMounted, ref, toRefs } from 'vue'
 import { useModal } from '../Modal'
 import DelConfirm from '@/components/sidebar/DelConfirm.vue'
 
@@ -69,12 +72,11 @@ export default defineComponent({
   components: {
     DelConfirm
   },
-  setup(props) {
+  setup (props) {
     const { id, name, parent } = toRefs(props)
     const isActionMenuOpen = ref(false)
     const content = ref('')
     const [registerDelConfirm, delConfirm] = useModal()
-
 
     const visibleChange = (visible: boolean) => {
       isActionMenuOpen.value = visible
@@ -84,16 +86,18 @@ export default defineComponent({
     }
 
     const deleteList = (e?: Event) => {
-      e && e.preventDefault();
-      hideActionMenu();
-      delConfirm.openModal();
+      e && e.preventDefault()
+      hideActionMenu()
+      delConfirm.openModal()
       // projectStore.deleteListByIdAction(id.value)
     }
     const clickListHandler = () => {
       console.log('click', id.value)
-      projectStore.commitActiveList(id.value)
+      projectStore.commitActiveList({
+        listId: id.value,
+        listName: name.value
+      })
     }
-
 
     const onConfirm = () => {
       console.log('文件夹被解散', id.value)
@@ -106,6 +110,8 @@ export default defineComponent({
     const setConfirmInfo = () => {
       content.value = `确认删除清单（${name.value}）吗？删除后清单不可恢复，清单中的所有待办也会同时被删除。`
     }
+
+    const isSelect = computed(() => projectStore.activeId === id.value)
 
     onMounted(() => {
       // getListByDirId(id.value)
@@ -121,7 +127,8 @@ export default defineComponent({
       clickListHandler,
       registerDelConfirm,
       content,
-      onConfirm
+      onConfirm,
+      isSelect
     }
   }
 })

@@ -23,3 +23,8 @@ export interface DeleteListParam {
   listId: string;
   dirId: string;
 }
+
+export interface ActiveListParam {
+  listId: string;
+  listName: string;
+}

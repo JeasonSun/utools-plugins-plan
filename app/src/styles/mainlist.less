@@ -25,6 +25,11 @@
 .mainlist-header__title {
   font-size: @font-large;
   flex: 1;
+  display: flex;
+  .mainlist-header__title-id{
+    color: @color-black7;
+    font-size: @font-small;
+  }
 }
 
 .mainlist-header__setting {
@@ -36,7 +41,7 @@
   }
 }
 
-.add-list__input {
+.ant-input.add-list__input {
   -webkit-appearance: none;
   background-color: #fafbfd;
   background-image: none;
@@ -58,8 +63,9 @@
   }
 
   &:focus {
-    outline: none;
+    outline: none!important;
     border-color: @color-primary;
+    box-shadow: none!important;
   }
   &.normal{
     background-color: #ffffff;
@@ -73,6 +79,7 @@
 .app-task__list {
   // height: 42px;
   // line-height: 42px;
+  padding: 5px 0;
   border-bottom: 1px solid @color-dividers;
   display: flex;
   align-items: center;

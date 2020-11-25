@@ -6,7 +6,14 @@
         :class="[isOpen ? 'iconsidebar_on' : 'iconsidebar_off']"
       ></span> -->
     </div>
-    <div class="mainlist-header__title">ID: {{ listId }}</div>
+    <div class="mainlist-header__title">
+      <div class="mainlist-header__title-name">
+        {{ listName }}
+      </div>
+      <div class="mainlist-header__title-id">
+        （ID：{{ listId }}）
+      </div>
+    </div>
     <div class="mainlist-header__setting">
       <span class="iconfont icondot"></span>
     </div>
@@ -29,6 +36,7 @@ export default defineComponent({
 
     return {
       listId: computed(() => projectStore.activeId),
+      listName: computed(() => projectStore.activeName),
       isOpen,
       toggleOpen
     }

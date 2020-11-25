@@ -6,6 +6,69 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "13722446",
+      "name": "-coupon Empty",
+      "font_class": "-couponEmpty",
+      "unicode": "e68f",
+      "unicode_decimal": 59023
+    },
+    {
+      "icon_id": "13722447",
+      "name": "-address empty",
+      "font_class": "-addressempty",
+      "unicode": "e690",
+      "unicode_decimal": 59024
+    },
+    {
+      "icon_id": "13722449",
+      "name": "-seach Empty",
+      "font_class": "-seachEmpty",
+      "unicode": "e691",
+      "unicode_decimal": 59025
+    },
+    {
+      "icon_id": "13722450",
+      "name": "-list Empty",
+      "font_class": "-listEmpty",
+      "unicode": "e692",
+      "unicode_decimal": 59026
+    },
+    {
+      "icon_id": "13722451",
+      "name": "-Notice empty",
+      "font_class": "-Noticeempty",
+      "unicode": "e693",
+      "unicode_decimal": 59027
+    },
+    {
+      "icon_id": "13722452",
+      "name": "-Transaction record empty",
+      "font_class": "-Transactionrecordempty",
+      "unicode": "e694",
+      "unicode_decimal": 59028
+    },
+    {
+      "icon_id": "13722454",
+      "name": "-order Empty",
+      "font_class": "-orderEmpty",
+      "unicode": "e695",
+      "unicode_decimal": 59029
+    },
+    {
+      "icon_id": "7716656",
+      "name": "ic_lefthide_hover",
+      "font_class": "ic_lefthide_hover",
+      "unicode": "e620",
+      "unicode_decimal": 58912
+    },
+    {
+      "icon_id": "15771792",
+      "name": "list",
+      "font_class": "list1",
+      "unicode": "e6ac",
+      "unicode_decimal": 59052
+    },
+    {
       "icon_id": "7404500",
       "name": "more",
       "font_class": "action",

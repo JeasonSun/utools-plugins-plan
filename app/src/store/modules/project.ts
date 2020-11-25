@@ -1,7 +1,7 @@
 import { getProjectListApi, addProjectListApi } from '@/api/project'
 import { defaultProject, ROOT_LEVEL } from '@/constant/default'
 import store from '@/store'
-import { AddListParam, ChangeOpenStateParam, DeleteListParam, ProjectInfo } from '@/types/project'
+import { ActiveListParam, AddListParam, ChangeOpenStateParam, DeleteListParam, ProjectInfo } from '@/types/project'
 import { hotModuleUnregisterModule } from '@/utils/helper/vuexHelper'
 import { isArray } from '@/utils/is'
 import { userStore } from '@/store/modules/user';
@@ -24,6 +24,7 @@ const { toast } = useMessage()
 export interface ProjectState {
   list: ProjectInfo[];
   activeId: Nullable<string>;
+  activeName: Nullable<string>;
 }
 
 @Module({ dynamic: true, namespaced: true, store, name: NAME })
@@ -31,10 +32,13 @@ class Project extends VuexModule {
 
   list: ProjectState['list'] = []
   activeId: ProjectState['activeId'] = null
+  activeName: ProjectState['activeName'] = null
 
   @Mutation
-  commitActiveList(listId: string): void {
+  commitActiveList(activeInfo: ActiveListParam): void {
+    const { listId, listName } = activeInfo
     this.activeId = listId;
+    this.activeName = listName;
   }
 
   /**

@@ -31,7 +31,7 @@
     text-align: center;
   }
 
-  .sidebar-list__action{
+  .sidebar-list__action {
     position: absolute;
     width: 32px;
     height: 32px;
@@ -41,14 +41,13 @@
     display: none;
   }
 
-  &:hover{
-    .sidebar-list__count{
+  &:hover {
+    .sidebar-list__count {
       display: none;
     }
-    .sidebar-list__action{
+    .sidebar-list__action {
       display: block;
     }
-   
   }
   .sidebar-list__arrow {
     // padding-left: 10px;
@@ -58,27 +57,31 @@
   }
 }
 
-
-.sidebar-list__action-menu{
+.sidebar-list__action-menu {
   background: @color-white;
   box-shadow: @shadow-3-down;
   border-radius: 2px;
   padding: 4px 0;
 }
-.sidebar-list__action-menu-item{
+.sidebar-list__action-menu-item {
   line-height: @line-height-normal;
   padding: 2px 10px;
   cursor: pointer;
   min-width: 60px;
-  &:hover{
+  &:hover {
     background-color: @color-blue-bg;
   }
 }
 
-.sidebar-list__cate{
+.sidebar-list__cate {
+  border: 1px solid @color-white;
+  // margin-right: 10px;
   border-top-right-radius: 16px;
   border-bottom-right-radius: 16px;
-  &:hover{
+  &:hover {
+    background-color: @color-blue1;
+  }
+  &.selected {
     background-color: @color-blue1;
   }
 }
@@ -109,25 +112,25 @@
       // height: 0;
     }
   }
-  &.active{
-    .list-dir.sidebar-list__count{
+  &.active {
+    .list-dir.sidebar-list__count {
       display: none;
     }
-    .list-dir.sidebar-list__action{
+    .list-dir.sidebar-list__action {
       display: block;
     }
   }
 }
 
-.sidebar-list__cate{
-  .sidebar-list__action{
+.sidebar-list__cate {
+  .sidebar-list__action {
     right: 2px;
   }
-  &.active{
-    .list-list.sidebar-list__count{
+  &.active {
+    .list-list.sidebar-list__count {
       display: none;
     }
-    .list-list.sidebar-list__action{
+    .list-list.sidebar-list__action {
       display: block;
     }
   }
@@ -149,13 +152,14 @@
 .sidebar-list__dir-list {
   // padding-left: 20px;
   transform-origin: top center;
-  .sidebar-list__cate{
+  .sidebar-list__cate {
     padding-left: 40px;
   }
 }
 
 .sidebar-flex-container {
   display: flex;
+  padding-right: 4px;
   flex-direction: column;
   height: 100vh;
   box-sizing: border-box;
