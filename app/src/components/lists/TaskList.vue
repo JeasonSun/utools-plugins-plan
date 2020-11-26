@@ -1,32 +1,49 @@
 <template>
-  <div class="app-task__list-list">
-    List
+  <div class="app-task__list-list" :class="{ empty: !taskList.length }">
+    <TaskItem
+      v-for="item in taskList"
+      :key="item.id"
+      :id="item.id"
+      :name="item.name"
+      :status="item.status"
+    />
+    <Empty tip="暂无清单任务" v-if="!taskList.length" />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watchEffect } from 'vue'
+import { computed, defineComponent, ref, toRefs, watchEffect } from 'vue'
 import { Task } from '@/types/task'
 import { projectStore } from '@/store/modules/project'
 import { tasksStore } from '@/store/modules/task'
-
+import { TaskCompleteState } from '@/enums/taskTypeEnum'
+import TaskItem from '@/components/lists/TaskItem.vue'
+import Empty from '@/components/Empty/index.vue'
 
 export default defineComponent({
   name: 'TaskList',
-  components: {},
+  components: {
+    TaskItem,
+    Empty
+  },
   props: {
     listId: {
       type: String,
       required: true
-    },
-  }, 
-  setup(){
-    const taskList = ref<Task[]>([])
+    }
+  },
+  setup (props) {
+    const { listId } = toRefs(props)
+
+    const taskList = computed<Task[]>(() => tasksStore.list)
     watchEffect(() => {
-      tasksStore.getTasksByListIdAction({})
+      tasksStore.getTasksByListIdAction({
+        listId: listId.value,
+        status: TaskCompleteState.ALL
+      })
     })
     return {
-      taskList: []
+      taskList
     }
   }
 })

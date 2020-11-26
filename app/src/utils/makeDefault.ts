@@ -1,7 +1,9 @@
 import { ROOT_LEVEL } from '@/constant/default';
 import { ProjectTypeEnum } from "@/enums/projectTypeEnum";
+import { TaskCompleteState } from '@/enums/taskTypeEnum';
 import { UserInfo } from '@/types/common';
 import { ProjectInfo } from '@/types/project';
+import { Task } from '@/types/task';
 import { snowUuid } from '@/utils/uuid';
 
 /**
@@ -41,5 +43,16 @@ export function makeList(name: string, parent: string = ROOT_LEVEL): ProjectInfo
     count: 0,
     id,
     parent
+  }
+}
+
+export function makeTask(name: string, parent: string): Task {
+  const id = snowUuid('t');
+  return {
+    name,
+    id,
+    parent,
+    status: TaskCompleteState.TODO,
+    complete: 0
   }
 }

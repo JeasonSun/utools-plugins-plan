@@ -8,7 +8,9 @@ import {
   Mutation,
   VuexModule
 } from 'vuex-module-decorators'
-import { GetTasksByIdParam, Task } from '@/types/task'
+import { CommitAddTaskParam, GetTasksByIdParam, Task } from '@/types/task'
+import { getTaskListApi } from '@/api/task'
+import { makeTask } from '@/utils/makeDefault'
 
 const NAME = 'task'
 hotModuleUnregisterModule(NAME)
@@ -23,9 +25,27 @@ class Tasks extends VuexModule {
 
   list: TaskState['list'] = []
 
+
+  @Mutation
+  commitTaskList(list: Task[]): void {
+    this.list = list
+  }
+
+  @Mutation
+  commitAddTask(param: CommitAddTaskParam): void {
+
+    const { taskName, listId } = param
+    console.log(taskName, listId)
+    const newTask = makeTask(taskName, listId)
+    const newList = [newTask, ...this.list]
+    this.list = [...newList]
+  }
+
   @Action
-  async getTasksByListIdAction(params: GetTasksByIdParam){
-    console.log(params)
+  async getTasksByListIdAction(params: GetTasksByIdParam) {
+    console.log('获取清单任务', params)
+    const tasks = await getTaskListApi()
+    this.commitTaskList(tasks)
   }
 
 }

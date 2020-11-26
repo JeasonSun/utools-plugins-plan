@@ -13,6 +13,7 @@
 </template>
 
 <script lang="ts">
+import { tasksStore } from '@/store/modules/task'
 import { defineComponent, ref, toRefs, unref } from 'vue'
 
 export default defineComponent({
@@ -32,6 +33,10 @@ export default defineComponent({
       const lId = unref(listId)
       console.log(taskName, lId)
       value.value = ''
+      tasksStore.commitAddTask({
+        taskName,
+        listId: lId
+      })
     }
     return {
       pressEnter: pressEnterHandler,

@@ -4,6 +4,7 @@ import localForage from 'localforage'
 import { isArray } from '../is'
 import { makeUser } from '../makeDefault'
 import { useMessage } from '@/hooks/web/useMessage'
+import { Task } from '@/types/task'
 
 const { toast } = useMessage()
 
@@ -89,6 +90,12 @@ export async function updateUser(id: string, info: UserInfo) {
   return true
 }
 
+/**
+ * --------------------  task ----------------------
+ */
+export async function getTaskList(): Promise<Task[]>{
+  return []
+}
 
 
 export default localStore

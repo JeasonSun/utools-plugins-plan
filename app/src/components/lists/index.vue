@@ -3,15 +3,14 @@
     <div class="app-list-content" v-if="listId">
       <div class="mainlist-container-flex">
         <ListHeader />
-        <ListAdd :listId="listId"/>
+        <ListAdd :listId="listId" />
       </div>
       <div class="mainlist-container-flex-list">
-        <TaskItem />
-        <TaskItem />
+        <TaskList :listId="listId" />
       </div>
     </div>
     <div class="app-list-empty-content" v-if="!listId">
-      <Empty tip="暂无清单任务"/>
+      <Empty tip="暂无清单任务" />
     </div>
   </div>
 </template>
@@ -21,7 +20,8 @@ import { computed, defineComponent } from 'vue'
 import '@/styles/mainlist.less'
 import ListHeader from '@/components/lists/ListHeader.vue'
 import ListAdd from '@/components/lists/ListAdd.vue'
-import TaskItem from '@/components/lists/TaskItem.vue'
+// import TaskItem from '@/components/lists/TaskItem.vue'
+import TaskList from '@/components/lists/TaskList.vue'
 import Empty from '@/components/Empty/index.vue'
 import { projectStore } from '@/store/modules/project'
 
@@ -30,7 +30,7 @@ export default defineComponent({
   components: {
     ListHeader,
     ListAdd,
-    TaskItem,
+    TaskList,
     Empty
   },
   props: {},
@@ -44,9 +44,9 @@ export default defineComponent({
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
-  .app-list-empty-content{
-    display: flex;
-    height: 100%;
-    align-items: center;
-  }
+.app-list-empty-content {
+  display: flex;
+  height: 100%;
+  align-items: center;
+}
 </style>
