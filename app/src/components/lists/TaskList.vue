@@ -1,10 +1,15 @@
 <template>
-  <div class="app-task__list-list"></div>
+  <div class="app-task__list-list">
+    List
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref, watchEffect } from 'vue'
 import { Task } from '@/types/task'
+import { projectStore } from '@/store/modules/project'
+import { tasksStore } from '@/store/modules/task'
+
 
 export default defineComponent({
   name: 'TaskList',
@@ -18,7 +23,7 @@ export default defineComponent({
   setup(){
     const taskList = ref<Task[]>([])
     watchEffect(() => {
-      
+      tasksStore.getTasksByListIdAction({})
     })
     return {
       taskList: []

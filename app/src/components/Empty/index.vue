@@ -37,6 +37,9 @@ export default defineComponent({
   width: 100%;
 }
 .empty-image-container {
+  font-size: 100px;
+  line-height: 100px;
+  padding: 10px ;
   .iconfont {
     font-size: 100px;
     color: @color-blue;
