@@ -12,13 +12,13 @@ import Sidebar from '@/components/sidebar/index.vue'
 import Lists from '@/components/lists/index.vue'
 import { userStore } from '@/store/modules/user'
 
-import '@/styles/home.less'
+import '@/styles/todo.less'
 import { projectStore } from '@/store/modules/project'
 import { toRawObj } from '@/utils'
 import { updateStoreListApi } from '@/api/project'
 
 export default defineComponent({
-  name: 'Home',
+  name: 'Todo',
   components: {
     Sidebar,
     Lists
