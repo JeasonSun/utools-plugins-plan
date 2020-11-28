@@ -3,6 +3,9 @@
   <div class="plan-app-layout app-grid-container" v-if="userLogined">
     <Sidebar />
     <Lists />
+    <div class="plan-app__main-content">
+      <router-view />
+    </div>
   </div>
 </template>
 
