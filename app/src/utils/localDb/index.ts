@@ -93,6 +93,10 @@ export async function updateUser(id: string, info: UserInfo) {
 /**
  * --------------------  task ----------------------
  */
+export async function addTask( task: Task, listId: string) {
+  
+}
+
 export async function getTaskList(): Promise<Task[]>{
   return []
 }

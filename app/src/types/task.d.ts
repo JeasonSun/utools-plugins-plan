@@ -12,7 +12,7 @@ export interface GetTasksByIdParam {
   status: TaskCompleteType;
 }
 
-export interface CommitAddTaskParam {
+export interface AddTaskParam {
   listId: string;
   taskName: string;
 }

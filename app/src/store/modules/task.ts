@@ -8,8 +8,8 @@ import {
   Mutation,
   VuexModule
 } from 'vuex-module-decorators'
-import { CommitAddTaskParam, GetTasksByIdParam, Task } from '@/types/task'
-import { getTaskListApi } from '@/api/task'
+import { AddTaskParam, GetTasksByIdParam, Task } from '@/types/task'
+import { addTaskByListIdApi, getTaskListApi } from '@/api/task'
 import { makeTask } from '@/utils/makeDefault'
 
 const NAME = 'task'
@@ -32,13 +32,18 @@ class Tasks extends VuexModule {
   }
 
   @Mutation
-  commitAddTask(param: CommitAddTaskParam): void {
+  commitAddTask(param: AddTaskParam): void {
 
     const { taskName, listId } = param
     console.log(taskName, listId)
     const newTask = makeTask(taskName, listId)
     const newList = [newTask, ...this.list]
     this.list = [...newList]
+  }
+
+  @Action
+  async addTaskByListIdAction(params: AddTaskParam){
+    const newTask = await addTaskByListIdApi(params)
   }
 
   @Action

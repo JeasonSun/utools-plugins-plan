@@ -1,5 +1,6 @@
-import { Task } from '@/types/task'
+import { AddTaskParam, Task } from '@/types/task'
 import * as DB from '@/utils/localDb'
+import { makeTask } from '@/utils/makeDefault'
 
 
 /**
@@ -7,4 +8,11 @@ import * as DB from '@/utils/localDb'
  */
 export async function getTaskListApi(): Promise<Task[]> {
   return await DB.getTaskList()
+}
+
+export async function addTaskByListIdApi(params: AddTaskParam) {
+  const { taskName, listId } = params;
+
+  const newTask = makeTask(taskName, listId)
+  return await DB.addTask(newTask, listId)
 }
