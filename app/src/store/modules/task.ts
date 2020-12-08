@@ -8,8 +8,8 @@ import {
   Mutation,
   VuexModule
 } from 'vuex-module-decorators'
-import { AddTaskParam, GetTasksByIdParam, Task } from '@/types/task'
-import { addTaskByListIdApi, getTaskListApi } from '@/api/task'
+import { AddTaskParam, ChangeTaskStatusParam, GetTasksByIdParam, Task } from '@/types/task'
+import { addTaskByListIdApi, getTaskListApi, updateTaskApi } from '@/api/task'
 import { makeTask } from '@/utils/makeDefault'
 
 const NAME = 'task'
@@ -32,25 +32,43 @@ class Tasks extends VuexModule {
   }
 
   @Mutation
-  commitAddTask(param: AddTaskParam): void {
-
-    const { taskName, listId } = param
-    console.log(taskName, listId)
-    const newTask = makeTask(taskName, listId)
+  commitAddTask(newTask: Task): void {
     const newList = [newTask, ...this.list]
     this.list = [...newList]
   }
 
+  @Mutation
+  commitUpdateTask(task: Task): void {
+    const newList = this.list.map(item => {
+      if (item.id === task.id) {
+        return task
+      }
+      return item
+    })
+    this.list = [...newList]
+  }
+
   @Action
-  async addTaskByListIdAction(params: AddTaskParam){
+  async addTaskByListIdAction(params: AddTaskParam) {
     const newTask = await addTaskByListIdApi(params)
+    console.log('已经存储在local中了', newTask)
+    this.commitAddTask(newTask)
   }
 
   @Action
   async getTasksByListIdAction(params: GetTasksByIdParam) {
     console.log('获取清单任务', params)
-    const tasks = await getTaskListApi()
+    const tasks = await getTaskListApi(params)
     this.commitTaskList(tasks)
+  }
+
+  @Action
+  async changeTaskStatusAction(params: ChangeTaskStatusParam) {
+    const task: Nullable<Task> = await updateTaskApi(params)
+    if (task) {
+      this.commitUpdateTask(task)
+    }
+
   }
 
 }

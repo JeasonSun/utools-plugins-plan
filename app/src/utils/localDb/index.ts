@@ -4,7 +4,8 @@ import localForage from 'localforage'
 import { isArray } from '../is'
 import { makeUser } from '../makeDefault'
 import { useMessage } from '@/hooks/web/useMessage'
-import { Task } from '@/types/task'
+import { ChangeTaskStatusParam, GetTasksByIdParam, Task } from '@/types/task'
+import { TaskCompleteState } from '@/enums/taskTypeEnum'
 
 const { toast } = useMessage()
 
@@ -93,12 +94,50 @@ export async function updateUser(id: string, info: UserInfo) {
 /**
  * --------------------  task ----------------------
  */
-export async function addTask( task: Task, listId: string) {
-  
+export async function addTask(task: Task, listId: string) {
+  const listStore = await localForage.createInstance({
+    name: `plan_task`,
+    storeName: `list_${listId}`
+  })
+  const result = await listStore.setItem(task.id, task)
+  return result
 }
 
-export async function getTaskList(): Promise<Task[]>{
-  return []
+export async function getTasksByList(params: GetTasksByIdParam): Promise<Task[]> {
+  const { listId, status } = params
+  const listStore = await localForage.createInstance({
+    name: `plan_task`,
+    storeName: `list_${listId}`
+  })
+  const result: Task[] = []
+  await listStore.iterate((value: Task, key: string) => {
+    const { status: itemStatus } = value;
+    if (status === TaskCompleteState.ALL) {
+      result.unshift(value)
+    } else {
+      status === itemStatus && result.unshift(value)
+    }
+  })
+  return result
+}
+
+export async function updateTask(params: ChangeTaskStatusParam): Promise<Nullable<Task>> {
+  const { listId, taskId, status } = params;
+  console.log(listId, taskId, status)
+  const listStore = await localForage.createInstance({
+    name: `plan_task`,
+    storeName: `list_${listId}`
+  })
+  const task: Nullable<Task> = await listStore.getItem(taskId)
+  if (task) {
+    // TODO: 这里先粗略的更改complete
+    const newTask = Object.assign({}, task, { status, complete: status === TaskCompleteState.DONE ? 100 : 0 })
+    await listStore.setItem(taskId, newTask)
+    return newTask
+  } else {
+    return null
+  }
+
 }
 
 

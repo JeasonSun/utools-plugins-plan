@@ -32,8 +32,11 @@ export default defineComponent({
       const taskName = unref(value)
       const lId = unref(listId)
       console.log(taskName, lId)
+      if (!taskName) {
+        return
+      }
       value.value = ''
-      tasksStore.commitAddTask({
+      tasksStore.addTaskByListIdAction({
         taskName,
         listId: lId
       })

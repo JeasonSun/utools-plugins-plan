@@ -6,6 +6,7 @@
       :id="item.id"
       :name="item.name"
       :status="item.status"
+      :parent="item.parent"
     />
     <Empty tip="暂无清单任务" v-if="!taskList.length" />
   </div>

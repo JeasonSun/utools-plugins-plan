@@ -1,3 +1,4 @@
+import { TaskCompleteType } from "@/enums/taskTypeEnum";
 
 export interface Task {
   parent: string;
@@ -15,4 +16,10 @@ export interface GetTasksByIdParam {
 export interface AddTaskParam {
   listId: string;
   taskName: string;
+}
+
+export interface ChangeTaskStatusParam{
+  listId: string;
+  taskId: string;
+  status: TaskCompleteType;
 }

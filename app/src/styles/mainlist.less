@@ -3,6 +3,8 @@
 .app-list-container {
   padding: 16px;
   padding-top: 0;
+  box-sizing: border-box;
+  height: 100vh;
 }
 .app-list-content {
   height: 100%;
@@ -77,9 +79,10 @@
 }
 
 .mainlist-container-flex-list {
-  padding-top: 20px;
+  margin-top: 20px;
   flex: 1;
   position: relative;
+  overflow-y: scroll;
 }
 .app-task__list-list {
   height: 100%;
