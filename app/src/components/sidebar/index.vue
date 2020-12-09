@@ -3,13 +3,16 @@
     <div class="sidebar-toolbar-flex-container">
       <Toolbar />
     </div>
-    <div class="sidebar-cate-flex-container">
+    <!-- <div class="sidebar-cate-flex-container">
       <ListCate icon="box" name="待归类" id="tl_1"/>
       <ListCate icon="daiban" name="今天"  id="tl_2"/>
       <ListCate icon="done" name="已完成"  id="tl_3"/>
       <ListCate icon="star" name="标星"  id="tl_4"/>
-    </div>
+    </div> -->
     <div class="sidebar-list-flex-container">
+      <!-- <div class="sidebar-tabs__container">
+        <div class="sidebar-tabs__item">清单</div>
+      </div> -->
       <ListContainer />
     </div>
     <div class="sidebar-action-flex-container">
@@ -22,9 +25,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from 'vue'
+import { defineComponent } from 'vue'
 import Toolbar from '@/components/sidebar/Toolbar.vue'
-import ListCate from '@/components/sidebar/ListCate.vue'
+// import ListCate from '@/components/sidebar/ListCate.vue'
 import ListContainer from '@/components/sidebar/ListContainer.vue'
 import '@/styles/sidebar.less'
 import { useModal } from '../Modal'
@@ -34,7 +37,7 @@ export default defineComponent({
   name: 'Sidebar',
   components: {
     Toolbar,
-    ListCate,
+    // ListCate,
     ListContainer,
     AddListModal
   },

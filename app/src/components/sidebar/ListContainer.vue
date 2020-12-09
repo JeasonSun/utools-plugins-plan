@@ -1,6 +1,6 @@
 <template>
   <div class="sidebar-list__container">
-    <header class="sidebar-list__header">清单</header>
+    <!-- <header class="sidebar-list__header">清单</header> -->
     <!-- <ListCate name="默认清单" /> -->
     <!-- <ListDir /> -->
     <template v-for="item in list">

@@ -3,9 +3,9 @@
     <div class="plan-logo">
       <span class="iconfont iconplanlist"></span>
     </div>
-    <div class="plan-setting">
+    <!-- <div class="plan-setting">
       <span class="iconfont iconSettings"></span>
-    </div>
+    </div> -->
     <!-- <div class="plan-notice has-notice">
       <span class="iconfont iconnotice"></span>
       <i class="notice-dot"></i>
