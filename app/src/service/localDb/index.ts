@@ -1,11 +1,12 @@
 import { UserInfo } from '@/types/common'
 import { ProjectInfo } from '@/types/project'
 import localForage from 'localforage'
-import { isArray } from '../is'
-import { makeUser } from '../makeDefault'
+import { isArray } from '@/utils/is'
+import { makeUser } from '@/utils/makeDefault'
 import { useMessage } from '@/hooks/web/useMessage'
 import { ChangeTaskStatusParam, GetTasksByIdParam, Task } from '@/types/task'
 import { TaskCompleteState } from '@/enums/taskTypeEnum'
+import Axios from '@/utils/axios'
 
 const { toast } = useMessage()
 
@@ -47,6 +48,8 @@ export async function updateStoreList(list: ProjectInfo[]): Promise<boolean> {
  * @param id 
  */
 export async function getUserInfo(id: string): Promise<Nullable<UserInfo>> {
+  const userInfo = await Axios.request({url:'/getUserInfo'})
+  console.log(userInfo,'---')
   const user: Nullable<UserInfo> = await localStore.getItem('user')
   console.log('获取用户信息', id, 'local', user?.id)
   if (!user || user.id !== id) {
